@@ -18,10 +18,14 @@ const ShopPokemon = () => {
   };
 
   let getIndividualPokemonData = async (results) => {
+    let holdingArray = [];
     results.map(async (result) => {
       const specificPokeData = await fetch(result.url);
       const specificPokeInfo = await specificPokeData.json();
-      setSpecificPokemon(specificPokemon.concat(specificPokeInfo));
+      holdingArray.push(specificPokeInfo);
+      if (holdingArray.length === 20) {
+        setSpecificPokemon(holdingArray);
+      }
     });
   };
 
