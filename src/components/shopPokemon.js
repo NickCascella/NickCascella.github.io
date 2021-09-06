@@ -1,4 +1,5 @@
 import react, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const ShopPokemon = () => {
   const [pokemonApi, setPokemonApi] = useState(null);
@@ -10,7 +11,7 @@ const ShopPokemon = () => {
 
   let getPokeData = async () => {
     const pokeData = await fetch(
-      "https://pokeapi.co/api/v2/pokemon?limit=20&offset=100"
+      "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
     );
     const pokeInfo = await pokeData.json();
     setPokemonApi(pokeInfo.results);
@@ -29,7 +30,7 @@ const ShopPokemon = () => {
     });
   };
 
-  if (!pokemonApi) {
+  if (!specificPokemon) {
     return <div>Loading...</div>;
   }
 
@@ -44,21 +45,36 @@ const ShopPokemon = () => {
   // };
 
   return (
-    <div className="App">
-      {/* {console.log(specificPokemon)}
-      {pokemonApi.map((pokemon) => {
-        return (
-          <div>
-            <div>{pokemon.name}</div>
-            {pokemonApi && (
-              <img src={pokemonApi.sprites.front_default} alt="Fetching"></img>
-            )}
-          </div>
-        );
-      })}
-       */}
+    <div className="showcasePokemonScreen">
+      <div className="showcasePokemonTitle">Pokemon!</div>
+      <div className="showcasePokemonCards">
+        {console.log(specificPokemon)}
+        {specificPokemon.map((pokemon) => {
+          return (
+            <div className="shopPokemonCard" id={pokemon.id}>
+              <Link
+                to={`/shopPokemon/${pokemon.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <img
+                  src={pokemon.sprites.front_default}
+                  alt="Fetching"
+                  className="shopPokemonCardImage"
+                ></img>
+                <div className="shopPokemonCardText">
+                  {capitalizeFirstLetter(pokemon.name)}
+                </div>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 export default ShopPokemon;

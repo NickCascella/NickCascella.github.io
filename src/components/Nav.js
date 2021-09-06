@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 const Nav = () => {
   return (
     <nav>
-      <ul>
-        <Link to="./">
+      <ul className="navLinks">
+        <Link to="./" style={{ textDecoration: "none" }}>
           <li>Home</li>
         </Link>
-        <Link to="./shopMain">
+        <Link to="./shopMain" style={{ textDecoration: "none" }}>
           <li>Shop Main</li>
         </Link>
       </ul>

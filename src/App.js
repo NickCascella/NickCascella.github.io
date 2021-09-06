@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Nav from "./components/Nav";
 import ShopMain from "./components/shopMain";
 import ShopPokemon from "./components/shopPokemon";
+import ShopPokemonIndvidually from "./components/shopPokemonIndividually";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/shopMain" component={ShopMain} />
-            <Route path="/shopPokemon" component={ShopPokemon} />
+            <Route exact path="/shopPokemon" component={ShopPokemon} />
+            <Route path="/shopPokemon/:id" component={ShopPokemonIndvidually} />
             {/* <Route exact path="/shop" component={Shop} />
             <Route path="/shop/:itemId" component={ItemDetail} /> */}
           </Switch>
