@@ -199,11 +199,15 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url("./backgroundImages/pokemonLandscape.JPG");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
 }
 
 .specificPokeballCard {
-  margin-top: 15%;
   display: flex;
+  color: white;
 }
 
 .specificPokeballCardLeftSide {
@@ -225,7 +229,7 @@ nav {
 }
 
 .specificPokeballCardRightSide {
-  border: solid 2px black;
+  border: 2px solid rgba(255, 255, 255, 0.555);
   border-top: none;
   display: flex;
   align-items: center;
@@ -238,9 +242,7 @@ nav {
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 20px;
-  border: solid 2px black;
-  border-left: none;
-  border-right: none;
+  border-top: 2px solid rgba(255, 255, 255, 0.555);
   width: 400px;
   text-align: center;
 }
@@ -250,5 +252,5 @@ nav {
   text-align: center;
   font-style: italic;
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 }

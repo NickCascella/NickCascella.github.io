@@ -2,6 +2,7 @@ import react, { useState, useEffect } from "react";
 
 const ShopSpecificPokeballs = ({ match }) => {
   const [specificPokeball, setSpecificPokeball] = useState();
+  const [pokeballQuantity, setPokeballQuantity] = useState(0);
 
   useEffect(() => {
     getPokeballsData();
@@ -22,10 +23,38 @@ const ShopSpecificPokeballs = ({ match }) => {
 
   const checkPrice = () => {
     let price = specificPokeball.cost;
-    return price > 0 ? price : "Currently Out of Stock";
+    return price > 0
+      ? `${formatNumber(price)} PokeCoins`
+      : "Currently Out of Stock";
   };
 
-  const changeQuantity = () => {};
+  const changeQuantity = (e, clicked, increase) => {
+    if (pokeballQuantity > 0 && clicked === true && increase === false) {
+      setPokeballQuantity(pokeballQuantity - 1);
+    } else if (clicked === true && increase === true) {
+      const increaedValue = pokeballQuantity + 1;
+      setPokeballQuantity(increaedValue);
+    } else if (clicked === false && isFinite(e.target.value)) {
+      setPokeballQuantity(parseInt(e.target.value));
+    }
+    e.preventDefault();
+  };
+
+  const addToCart = (e, name, quantity, price) => {
+    if (price === 0) {
+      e.preventDefault();
+      return;
+    }
+
+    const pokemonAdded = {
+      name: name,
+      imgSrc: specificPokeball.sprites.default,
+      quantity: quantity,
+      price: price,
+    };
+    console.log(pokemonAdded);
+    e.preventDefault();
+  };
 
   return (
     <div className="specificPokeballScreen">
@@ -40,12 +69,12 @@ const ShopSpecificPokeballs = ({ match }) => {
           ></img>
           <form
             onSubmit={(e) => {
-              //   addToCart(
-              //     e,
-              //     capitalizeFirstLetter(specificPokeball.name),
-              //     pokemonQuantity,
-              //     pokemonCapturePrice
-              //   );
+              addToCart(
+                e,
+                capitalizeFirstLetter(specificPokeball.name),
+                pokeballQuantity,
+                specificPokeball.cost
+              );
             }}
           >
             <div>
@@ -57,7 +86,8 @@ const ShopSpecificPokeballs = ({ match }) => {
                 -
               </button>
               <input
-                // value={pokemonQuantity}
+                className="specificPokemonQuantityDisplay"
+                value={pokeballQuantity}
                 type="number"
                 required
                 onChange={(e) => {
@@ -72,6 +102,7 @@ const ShopSpecificPokeballs = ({ match }) => {
                 +
               </button>
             </div>
+            <button type="submit">Add</button>
           </form>
         </div>
         <div className="specificPokeballCardRightSide">
@@ -87,7 +118,7 @@ const ShopSpecificPokeballs = ({ match }) => {
           <div className="specificPokeballTextData">
             {specificPokeball.flavor_text_entries[2].text}
           </div>
-          <div className="specificPokeballSubheading">Price per</div>
+          <div className="specificPokeballSubheading">Price Per Unit</div>
           <div className="specificPokeballTextData">{checkPrice()}</div>
         </div>
       </div>
@@ -97,6 +128,10 @@ const ShopSpecificPokeballs = ({ match }) => {
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function formatNumber(num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 
 export default ShopSpecificPokeballs;

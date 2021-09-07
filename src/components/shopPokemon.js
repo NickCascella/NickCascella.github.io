@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const ShopPokemon = () => {
   // const [pokemonApi, setPokemonApi] = useState(null);
   const [specificPokemon, setSpecificPokemon] = useState([]);
+  const [apiOffset, setApiOffset] = useState(0);
 
   useEffect(() => {
     getPokeData();
@@ -11,7 +12,7 @@ const ShopPokemon = () => {
 
   let getPokeData = async () => {
     const pokeData = await fetch(
-      "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
+      `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${apiOffset}`
     );
     const pokeInfo = await pokeData.json();
     // setPokemonApi(pokeInfo.results);
@@ -28,6 +29,19 @@ const ShopPokemon = () => {
         setSpecificPokemon(holdingArray);
       }
     });
+  };
+
+  const nextPage = () => {
+    setApiOffset(apiOffset + 20);
+    getPokeData();
+  };
+
+  const previousPage = () => {
+    if (apiOffset === -20) {
+      return;
+    }
+    setApiOffset(apiOffset - 20);
+    getPokeData();
   };
 
   if (!specificPokemon) {
@@ -57,6 +71,8 @@ const ShopPokemon = () => {
           );
         })}
       </div>
+      <button onClick={previousPage}>Previous page</button>
+      <button onClick={nextPage}>Next Page</button>
     </div>
   );
 };
