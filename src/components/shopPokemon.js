@@ -2,7 +2,7 @@ import react, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const ShopPokemon = () => {
-  const [pokemonApi, setPokemonApi] = useState(null);
+  // const [pokemonApi, setPokemonApi] = useState(null);
   const [specificPokemon, setSpecificPokemon] = useState([]);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const ShopPokemon = () => {
       "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
     );
     const pokeInfo = await pokeData.json();
-    setPokemonApi(pokeInfo.results);
+    // setPokemonApi(pokeInfo.results);
     getIndividualPokemonData(pokeInfo.results);
   };
 
@@ -33,22 +33,10 @@ const ShopPokemon = () => {
   if (!specificPokemon) {
     return <div>Loading...</div>;
   }
-
-  // let render = () => {
-  //   return (
-  //     <div className="App">
-  //         {pokemonApi && (
-  // <img src={pokemonApi.sprites.front_default} alt="Fetching"></img>
-  // )}
-  //     </div>
-  //   );
-  // };
-
   return (
     <div className="showcasePokemonScreen">
       <div className="showcasePokemonTitle">Pokemon!</div>
       <div className="showcasePokemonCards">
-        {console.log(specificPokemon)}
         {specificPokemon.map((pokemon) => {
           return (
             <div className="shopPokemonCard" id={pokemon.id}>

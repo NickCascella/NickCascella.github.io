@@ -11,6 +11,9 @@ const Nav = () => {
         <Link to="./shopMain" style={{ textDecoration: "none" }}>
           <li>Shop Main</li>
         </Link>
+        <Link to="./shoppingCart" style={{ textDecoration: "none" }}>
+          <li>Cart</li>
+        </Link>
       </ul>
     </nav>
   );

@@ -1,28 +1,39 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ShoppingCartContext } from "./Context";
 import Nav from "./components/Nav";
+import ShoppingCart from "./components/shoppingCart";
 import ShopMain from "./components/shopMain";
 import ShopPokemon from "./components/shopPokemon";
 import ShopPokemonIndvidually from "./components/shopPokemonIndividually";
+import ShopPokeballs from "./components/shopItems";
+import ShopSpecificPokeballs from "./components/shopSpecificPokeballs";
 
 function App() {
+  const [shoppingCart, setShoppingCart] = useState([]);
+
   return (
     <div>
+      {/* <ShoppingCartContext.provider value={{ shoppingCart, setShoppingCart }}> */}
       <Router>
         <div className="organize">
           <Nav />
           <Switch>
             <Route exact path="/" component={HomePage} />
+            <Route path="/shoppingCart" component={ShoppingCart} />
             <Route path="/shopMain" component={ShopMain} />
             <Route exact path="/shopPokemon" component={ShopPokemon} />
             <Route path="/shopPokemon/:id" component={ShopPokemonIndvidually} />
-            {/* <Route exact path="/shop" component={Shop} />
-            <Route path="/shop/:itemId" component={ItemDetail} /> */}
+            <Route exact path="/shopPokeballs" component={ShopPokeballs} />
+            <Route
+              path="/shopPokeballs/:id"
+              component={ShopSpecificPokeballs}
+            />
           </Switch>
         </div>
       </Router>
+      {/* </ShoppingCartContext.provider> */}
     </div>
   );
 }

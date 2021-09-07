@@ -160,3 +160,95 @@ nav {
   justify-content: center;
   flex-direction: column;
 }
+
+.specificPokemonQuantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.specificPokemonQuantityDisplay {
+  color: white;
+  text-align: center;
+  background: none;
+  border: none;
+}
+
+/* BELOW IS POKEBALLS CSS */
+
+#showcaseAllPokeballs {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.shopShowcasePokeballs {
+  width: 300px;
+}
+
+.shopPokeballCardImage {
+  height: 150px;
+}
+
+/* BELOW IS SPECIFIC POKEBALLS CSS */
+
+.specificPokeballScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.specificPokeballCard {
+  margin-top: 15%;
+  display: flex;
+}
+
+.specificPokeballCardLeftSide {
+  margin-top: 40px;
+  width: 400px;
+  text-align: center;
+}
+
+.specificPokeballCardName {
+  display: flex;
+  justify-content: center;
+  font-family: "Press Start 2P", cursive;
+  font-size: 30px;
+  color: cadetblue;
+}
+
+.specificPokeballCardImage {
+  width: 250px;
+}
+
+.specificPokeballCardRightSide {
+  border: solid 2px black;
+  border-top: none;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 10%;
+  width: 430px;
+}
+
+.specificPokeballSubheading {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  border: solid 2px black;
+  border-left: none;
+  border-right: none;
+  width: 400px;
+  text-align: center;
+}
+
+.specificPokeballTextData {
+  width: 400px;
+  text-align: center;
+  font-style: italic;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

@@ -1,7 +1,11 @@
 import react, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { ShoppingCartContext } from "../Context";
 
 const ShopPokemonIndvidually = ({ match }) => {
+  // const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
+
   let pokemonId = match.params.id;
   useEffect(() => {
     getSpeciesData();
@@ -10,6 +14,7 @@ const ShopPokemonIndvidually = ({ match }) => {
 
   const [speciesData, setSpeciesData] = useState(null);
   const [pokemonData, setPokemonData] = useState(null);
+  const [pokemonQuantity, setPokemonQuantity] = useState(0);
 
   const getSpeciesData = async () => {
     const specificPokemonUrl = await fetch(
@@ -29,6 +34,7 @@ const ShopPokemonIndvidually = ({ match }) => {
     console.log(specificPokemonUrlInfo);
   };
 
+  //Prevents early render of incomplete API calls
   if (!speciesData || !pokemonData) {
     return <div>Loading...</div>;
   }
@@ -64,6 +70,28 @@ const ShopPokemonIndvidually = ({ match }) => {
     );
   };
 
+  const changeQuantity = (e, clicked, increase) => {
+    if (pokemonQuantity > 0 && clicked === true && increase === false) {
+      setPokemonQuantity(pokemonQuantity - 1);
+    } else if (clicked === true && increase === true) {
+      const increaedValue = pokemonQuantity + 1;
+      setPokemonQuantity(increaedValue);
+    } else if (clicked === false && isFinite(e.target.value)) {
+      setPokemonQuantity(parseInt(e.target.value));
+    }
+    e.preventDefault();
+  };
+
+  const addToCart = (e, name, quantity, price) => {
+    const pokemonAdded = {
+      name: name,
+      imgSrc: pokemonData.sprites.front_default,
+      quantity: quantity,
+      price: price,
+    };
+    e.preventDefault();
+  };
+
   return (
     <div className="showcaseSpecificPokemonScreen">
       <div className="shopSpecificPokemonCard" id={pokemonData.id}>
@@ -86,7 +114,44 @@ const ShopPokemonIndvidually = ({ match }) => {
               className="shopSpecificPokemonCardImage"
             ></img>
           </div>
-          <button>Add+</button>
+
+          <form
+            onSubmit={(e) => {
+              addToCart(
+                e,
+                capitalizeFirstLetter(pokemonData.name),
+                pokemonQuantity,
+                pokemonCapturePrice
+              );
+            }}
+          >
+            <div className="specificPokemonQuantity">
+              <button
+                onClick={(e) => {
+                  changeQuantity(e, true, false);
+                }}
+              >
+                -
+              </button>
+              <input
+                className="specificPokemonQuantityDisplay"
+                value={pokemonQuantity}
+                type="number"
+                required
+                onChange={(e) => {
+                  changeQuantity(e, false);
+                }}
+              ></input>
+              <button
+                onClick={(e) => {
+                  changeQuantity(e, true, true);
+                }}
+              >
+                +
+              </button>
+            </div>
+            <button type="submit">Add</button>
+          </form>
         </div>
 
         <div className="specificPokemonCardDetails">
