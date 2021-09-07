@@ -29,6 +29,8 @@ nav {
   background-image: url("/src/backgroundImages/pokemonNursery.JPG");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
+  height: 1500px;
 }
 
 .showcasePokemonTitle {
@@ -75,23 +77,28 @@ nav {
 /* ^^^^^^^^^ For pokemon shop NOT specific pokemon */
 
 .showcaseSpecificPokemonScreen {
-  margin: auto;
+  display: flex;
   justify-content: center;
   align-items: center;
-  width: 800px;
-}
-
-.shopSpecificPokemonCard {
-  /* border: 2px solid black; */
-  width: max-content;
-  height: max-content;
-  text-align: center;
-  margin-left: 10%;
-  margin-top: 1%;
-  margin-bottom: 1%;
+  width: 100%;
+  height: 100vh;
   background-image: url("./backgroundImages/pokemonLandscape.JPG");
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.shopSpecificPokemonCard {
+  width: max-content;
+  height: max-content;
+  text-align: center;
+  margin-top: 1%;
+  margin-bottom: 15%;
+  display: flex;
+  flex-direction: row;
+}
+
+.specificPokemonTitleAndImage {
+  margin-top: 8%;
 }
 
 .shopSpecificPokemonCardImages {
@@ -110,15 +117,46 @@ nav {
   padding-top: 60px;
 }
 
-.specificPokemonCardLabels {
+.specificPokemonCardDetailsTitle {
   color: white;
   font-weight: bold;
-  text-decoration: underline;
+  padding-top: 10px;
   padding-bottom: 10px;
+  font-size: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.555);
+  border-bottom: none;
+}
+
+.specificPokemonCardDetails {
+  color: white;
+  margin-top: 4%;
+}
+
+.specificPokemonSubTitle {
+  font-size: 19px;
+  font-weight: 500;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.specificPokemonDescription {
+  border: 2px solid rgba(255, 255, 255, 0.555);
+  padding: 5px;
 }
 
 .shopSpecificPokemonCardDescription {
   font-style: italic;
-  color: white;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.specificPokemonPotentialMoves {
+  border: 2px solid rgba(255, 255, 255, 0.555);
+  border-top: none;
+  padding: 5px;
+}
+
+.specificPokemonMovesList {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
