@@ -7,7 +7,7 @@ import ShoppingCart from "./components/shoppingCart";
 import ShopMain from "./components/shopMain";
 import ShopPokemon from "./components/shopPokemon";
 import ShopPokemonIndvidually from "./components/shopPokemonIndividually";
-import ShopPokeballs from "./components/shopItems";
+import ShopPokeballs from "./components/shopPokeballs";
 import ShopSpecificPokeballs from "./components/shopSpecificPokeballs";
 
 function App() {

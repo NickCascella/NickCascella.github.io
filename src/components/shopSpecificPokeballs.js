@@ -41,18 +41,18 @@ const ShopSpecificPokeballs = ({ match }) => {
   };
 
   const addToCart = (e, name, quantity, price) => {
-    if (price === 0) {
+    if (price <= 0) {
       e.preventDefault();
       return;
     }
 
-    const pokemonAdded = {
+    const itemAdded = {
       name: name,
       imgSrc: specificPokeball.sprites.default,
       quantity: quantity,
       price: price,
     };
-    console.log(pokemonAdded);
+    console.log(itemAdded);
     e.preventDefault();
   };
 

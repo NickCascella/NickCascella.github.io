@@ -8,7 +8,7 @@ const ShopMain = () => {
         <li>Pokemon</li>
       </Link>
       <Link to="./shopPokeballs" style={{ textDecoration: "none" }}>
-        <li>Pokeballs</li>
+        <li>Pokeballs and Extras</li>
       </Link>
     </div>
   );

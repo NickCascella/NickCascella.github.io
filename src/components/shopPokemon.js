@@ -8,7 +8,7 @@ const ShopPokemon = () => {
 
   useEffect(() => {
     getPokeData();
-  }, []);
+  }, [apiOffset]);
 
   let getPokeData = async () => {
     const pokeData = await fetch(
@@ -29,19 +29,6 @@ const ShopPokemon = () => {
         setSpecificPokemon(holdingArray);
       }
     });
-  };
-
-  const nextPage = () => {
-    setApiOffset(apiOffset + 20);
-    getPokeData();
-  };
-
-  const previousPage = () => {
-    if (apiOffset === -20) {
-      return;
-    }
-    setApiOffset(apiOffset - 20);
-    getPokeData();
   };
 
   if (!specificPokemon) {
@@ -71,8 +58,22 @@ const ShopPokemon = () => {
           );
         })}
       </div>
-      <button onClick={previousPage}>Previous page</button>
-      <button onClick={nextPage}>Next Page</button>
+      <button
+        onClick={() => {
+          if (apiOffset >= 20) {
+            setApiOffset(apiOffset - 20);
+          }
+        }}
+      >
+        Previous page
+      </button>
+      <button
+        onClick={() => {
+          setApiOffset(apiOffset + 20);
+        }}
+      >
+        Next Page
+      </button>
     </div>
   );
 };

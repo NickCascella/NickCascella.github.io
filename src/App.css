@@ -82,7 +82,9 @@ nav {
   align-items: center;
   width: 100%;
   height: 100vh;
-  background-image: url("./backgroundImages/pokemonLandscape.JPG");
+  /* background-image: url("./backgroundImages/pokemonLandscape.JPG"); */
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+    url("./backgroundImages/pokemonLandscape.JPG");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -199,7 +201,8 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("./backgroundImages/pokemonLandscape.JPG");
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+    url("./backgroundImages/pokemonLandscape.JPG");
   background-position: center;
   background-size: cover;
   height: 100vh;
@@ -208,6 +211,7 @@ nav {
 .specificPokeballCard {
   display: flex;
   color: white;
+  margin-bottom: 7%;
 }
 
 .specificPokeballCardLeftSide {

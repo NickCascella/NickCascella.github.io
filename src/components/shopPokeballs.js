@@ -20,7 +20,7 @@ const ShopPokeballs = () => {
       const specificPokeballData = await fetch(pokeballsData.url);
       const specificPokeballInfo = await specificPokeballData.json();
       holdingArray.push(specificPokeballInfo);
-      if (holdingArray.length === 16) {
+      if (holdingArray.length === 20) {
         setSpecificPokeballs(holdingArray);
       }
     });
