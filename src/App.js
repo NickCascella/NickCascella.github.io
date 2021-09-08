@@ -9,13 +9,14 @@ import ShopPokemon from "./components/shopPokemon";
 import ShopPokemonIndvidually from "./components/shopPokemonIndividually";
 import ShopPokeballs from "./components/shopPokeballs";
 import ShopSpecificPokeballs from "./components/shopSpecificPokeballs";
+import HomePage from "./components/Home";
 
 function App() {
   const [shoppingCart, setShoppingCart] = useState([]);
 
   return (
-    <div>
-      {/* <ShoppingCartContext.provider value={{ shoppingCart, setShoppingCart }}> */}
+    // <div>
+    <ShoppingCartContext.Provider value={{ shoppingCart, setShoppingCart }}>
       <Router>
         <div className="organize">
           <Nav />
@@ -33,13 +34,13 @@ function App() {
           </Switch>
         </div>
       </Router>
-      {/* </ShoppingCartContext.provider> */}
-    </div>
+    </ShoppingCartContext.Provider>
+    // {/* </div> */}
   );
 }
 
-let HomePage = () => {
-  return <div>Welcome to the one stop Pokemon Shop</div>;
-};
+// let HomePage = () => {
+//   return <div>Welcome to the one stop Pokemon Shop</div>;
+// };
 
 export default App;

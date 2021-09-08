@@ -1,9 +1,11 @@
 import react, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const ShopPokemon = () => {
+const HomePage = () => {
+  // const [pokemonApi, setPokemonApi] = useState(null);
   const [specificPokemon, setSpecificPokemon] = useState([]);
   const [apiOffset, setApiOffset] = useState(0);
+  const [filteredPokemon, setFilteredPokemon] = useState([]);
 
   useEffect(() => {
     getPokeData();
@@ -14,7 +16,7 @@ const ShopPokemon = () => {
       `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${apiOffset}`
     );
     const pokeInfo = await pokeData.json();
-
+    // setPokemonApi(pokeInfo.results);
     getIndividualPokemonData(pokeInfo.results);
   };
 
@@ -34,12 +36,26 @@ const ShopPokemon = () => {
     return <div>Loading...</div>;
   }
 
+  const handleSearch = (arr, searchInput) => {
+    const filteredData = arr.filter((value) => {
+      const searchStr = searchInput.toLowerCase();
+      const nameMatches = value.name.toLowerCase().includes(searchStr);
+      return nameMatches;
+    });
+    setFilteredPokemon(filteredData);
+  };
+
   return (
     <div className="showcasePokemonScreen">
       <div className="showcasePokemonTitle">Pokemon!</div>
-
+      <input
+        type="text"
+        onChange={(e) => {
+          handleSearch(specificPokemon, e.target.value);
+        }}
+      ></input>
       <div className="showcasePokemonCards">
-        {specificPokemon.map((pokemon) => {
+        {filteredPokemon.map((pokemon) => {
           return (
             <div className="shopPokemonCard" id={pokemon.id}>
               <Link
@@ -83,4 +99,4 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export default ShopPokemon;
+export default HomePage;

@@ -2,9 +2,10 @@ import react, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../Context";
+import ShoppingCart from "./shoppingCart";
 
 const ShopPokemonIndvidually = ({ match }) => {
-  // const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
+  const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
 
   let pokemonId = match.params.id;
   useEffect(() => {
@@ -59,13 +60,13 @@ const ShopPokemonIndvidually = ({ match }) => {
     };
     return (
       <div className="specificPokemonMovesList">
-        <div>{pokemonData.moves[number()].move.name}</div>
-        <div>{pokemonData.moves[number()].move.name}</div>
-        <div>{pokemonData.moves[number()].move.name}</div>
-        <div>{pokemonData.moves[number()].move.name}</div>
-        <div>{pokemonData.moves[number()].move.name}</div>
-        <div>{pokemonData.moves[number()].move.name}</div>
-        <div>{pokemonData.moves[number()].move.name}</div>
+        <div>{pokemonData.moves[1].move.name}</div>
+        <div>{pokemonData.moves[3].move.name}</div>
+        <div>{pokemonData.moves[6].move.name}</div>
+        <div>{pokemonData.moves[15].move.name}</div>
+        <div>{pokemonData.moves[18].move.name}</div>
+        <div>{pokemonData.moves[21].move.name}</div>
+        <div>{pokemonData.moves[39].move.name}</div>
       </div>
     );
   };
@@ -89,6 +90,7 @@ const ShopPokemonIndvidually = ({ match }) => {
       quantity: quantity,
       price: price,
     };
+    setShoppingCart(shoppingCart.concat(pokemonAdded));
     e.preventDefault();
   };
 
