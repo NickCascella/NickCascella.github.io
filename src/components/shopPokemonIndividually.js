@@ -44,6 +44,10 @@ const ShopPokemonIndvidually = ({ match }) => {
     (1 / speciesData.capture_rate) * 100000
   );
 
+  const generateId = () => {
+    return Math.random() * 1000;
+  };
+
   const organizePokemonStats = () => {
     return pokemonData.stats.map((stats) => {
       return (
@@ -55,18 +59,12 @@ const ShopPokemonIndvidually = ({ match }) => {
   };
 
   const pickRandomMoves = () => {
-    const number = () => {
-      return Math.floor(Math.random() * pokemonData.moves.length);
-    };
     return (
       <div className="specificPokemonMovesList">
+        <div>{pokemonData.moves[0].move.name}</div>
         <div>{pokemonData.moves[1].move.name}</div>
+        <div>{pokemonData.moves[2].move.name}</div>
         <div>{pokemonData.moves[3].move.name}</div>
-        <div>{pokemonData.moves[6].move.name}</div>
-        <div>{pokemonData.moves[15].move.name}</div>
-        <div>{pokemonData.moves[18].move.name}</div>
-        <div>{pokemonData.moves[21].move.name}</div>
-        <div>{pokemonData.moves[39].move.name}</div>
       </div>
     );
   };
@@ -84,7 +82,13 @@ const ShopPokemonIndvidually = ({ match }) => {
   };
 
   const addToCart = (e, name, quantity, price) => {
+    if (price <= 0) {
+      e.preventDefault();
+      return;
+    }
+
     const pokemonAdded = {
+      id: generateId(),
       name: name,
       imgSrc: pokemonData.sprites.front_default,
       quantity: quantity,
@@ -167,7 +171,8 @@ const ShopPokemonIndvidually = ({ match }) => {
           <div className="specificPokemonPotentialMoves">
             <div className="specificPokemonSubTitle">Potential Moves:</div>
             <div className="shopSpecificPokemonCardDescription">
-              (Can have up to four. This is NOT a full list.)
+              (These are examples of some moves it COULD have. This is NOT a
+              full list.)
             </div>
             <div className="specificPokemonMovesList">
               <div>{pickRandomMoves()}</div>
