@@ -1,10 +1,10 @@
-import react, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { ShoppingCartContext } from "../Context";
+import { GlobalContext } from "../Context";
 
 const ShopPokemonIndvidually = ({ match }) => {
-  const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
+  const { shoppingCart, setShoppingCart, LoadingScreen } =
+    useContext(GlobalContext);
 
   let pokemonId = match.params.id;
   useEffect(() => {
@@ -39,7 +39,7 @@ const ShopPokemonIndvidually = ({ match }) => {
 
   //Prevents early render of incomplete API calls
   if (!speciesData || !pokemonData) {
-    return <div>Loading...</div>;
+    return <LoadingScreen></LoadingScreen>;
   }
   const pokemonBackgroundColor = speciesData.color.name;
   const pokemonCapturePrice = Math.floor(
@@ -223,7 +223,7 @@ const ShopPokemonIndvidually = ({ match }) => {
           <div className="specificPokemonDescription">
             <div className="specificPokemonSubTitle">Description:</div>
             <div className="shopSpecificPokemonCardDescription">
-              {speciesData.flavor_text_entries[6].flavor_text}
+              {lettersOnly(speciesData.flavor_text_entries[7].flavor_text)}
             </div>
           </div>
           <div className="specificPokemonPotentialMoves">
@@ -258,6 +258,10 @@ function capitalizeFirstLetter(string) {
 
 function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+}
+
+function lettersOnly(str) {
+  return str.replace(/[^a-zA-Z\é\É]/g, " ");
 }
 
 export default ShopPokemonIndvidually;

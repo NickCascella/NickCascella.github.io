@@ -1,16 +1,15 @@
-import react, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingCartContext } from "../Context";
+import { GlobalContext } from "../Context";
 
 const Nav = () => {
-  const { shoppingCart } = useContext(ShoppingCartContext);
+  const { shoppingCart } = useContext(GlobalContext);
 
   const shoppingCartDisplay = () => {
     let reading = document.getElementById("navShoppingCartNumber");
 
     if (shoppingCart.length < 1) {
       reading.style.display = "none";
-      console.log("hi");
     } else {
       reading.style.display = "inline";
     }

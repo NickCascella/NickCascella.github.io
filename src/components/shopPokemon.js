@@ -1,7 +1,9 @@
-import react, { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { GlobalContext } from "../Context";
 
 const ShopPokemon = () => {
+  const { LoadingScreen } = useContext(GlobalContext);
   const [specificPokemon, setSpecificPokemon] = useState([]);
   const [apiOffset, setApiOffset] = useState(0);
 
@@ -31,7 +33,7 @@ const ShopPokemon = () => {
   };
 
   if (!specificPokemon) {
-    return <div>Loading...</div>;
+    return <LoadingScreen></LoadingScreen>;
   }
 
   return (
@@ -61,7 +63,7 @@ const ShopPokemon = () => {
       </div>
       <button
         onClick={() => {
-          if (apiOffset >= 20) {
+          if (apiOffset >= 20 && apiOffset !== 800) {
             setApiOffset(apiOffset - 20);
           }
         }}
@@ -70,11 +72,16 @@ const ShopPokemon = () => {
       </button>
       <button
         onClick={() => {
-          setApiOffset(apiOffset + 20);
+          if (apiOffset != 800) {
+            setApiOffset(apiOffset + 20);
+          }
         }}
       >
         Next Page
       </button>
+      <div>
+        Page Number: {apiOffset / 20} / {40}
+      </div>
     </div>
   );
 };

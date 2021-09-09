@@ -280,3 +280,42 @@ nav {
   padding-top: 10px;
   padding-bottom: 20px;
 }
+
+#loadingContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
+    url("./backgroundImages/pokemonLandscape.JPG");
+  background-position: center;
+  background-size: cover;
+}
+
+.spinner-4 {
+  width: 200px;
+  height: 200px;
+  display: grid;
+  animation: s4 4s infinite;
+}
+.spinner-4::before,
+.spinner-4::after {
+  content: "";
+  grid-area: 1/1;
+  border: 25px solid;
+  border-radius: 50%;
+  border-color: red red #0000 #0000;
+  mix-blend-mode: darken;
+  animation: s4 1s infinite linear;
+}
+.spinner-4::after {
+  border-color: #0000 #0000 blue blue;
+  animation-direction: reverse;
+}
+
+@keyframes s4 {
+  100% {
+    transform: rotate(1turn);
+  }
+}

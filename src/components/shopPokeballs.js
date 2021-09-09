@@ -1,7 +1,9 @@
-import react, { useEffect, useState } from "react";
+import react, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { GlobalContext } from "../Context";
 
 const ShopPokeballs = () => {
+  const { LoadingScreen } = useContext(GlobalContext);
   const [specificPokeballs, setSpecificPokeballs] = useState([]);
 
   useEffect(() => {
@@ -27,7 +29,7 @@ const ShopPokeballs = () => {
   };
 
   if (!specificPokeballs) {
-    return <div>Loading...</div>;
+    return <LoadingScreen></LoadingScreen>;
   }
   console.log(specificPokeballs);
   return (

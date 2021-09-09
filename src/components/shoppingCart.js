@@ -1,9 +1,9 @@
-import react, { useEffect, useState } from "react";
 import { useContext } from "react";
-import { ShoppingCartContext } from "../Context";
+import { GlobalContext } from "../Context";
 
 const ShoppingCart = () => {
-  const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
+  const { shoppingCart, setShoppingCart, LoadingScreen } =
+    useContext(GlobalContext);
 
   let runningTotal = 0;
 
@@ -38,7 +38,7 @@ const ShoppingCart = () => {
   };
 
   if (shoppingCart.length === 0) {
-    return <div>Empty Cart</div>;
+    return <LoadingScreen></LoadingScreen>;
   }
 
   return (

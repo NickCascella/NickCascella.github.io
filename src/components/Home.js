@@ -1,7 +1,9 @@
-import react, { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { GlobalContext } from "../Context";
 
 const HomePage = () => {
+  const { LoadingScreen } = useContext(GlobalContext);
   const [specificPokemon, setSpecificPokemon] = useState([]);
   const [specificPokeballs, setSpecificPokeballs] = useState([]);
   const [filteredPokemon, setFilteredPokemon] = useState([]);
@@ -14,10 +16,11 @@ const HomePage = () => {
 
   let getPokeData = async () => {
     const pokeData = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?limit=500&offset=0`
+      `https://pokeapi.co/api/v2/pokemon?limit=800&offset=0`
     );
     const pokeInfo = await pokeData.json();
     getIndividualPokemonData(pokeInfo.results);
+    console.log(pokeInfo);
   };
 
   let getIndividualPokemonData = async (results) => {
@@ -26,7 +29,7 @@ const HomePage = () => {
       const specificPokeData = await fetch(result.url);
       const specificPokeInfo = await specificPokeData.json();
       holdingArray.push(specificPokeInfo);
-      if (holdingArray.length === 22) {
+      if (holdingArray.length === 799) {
         setSpecificPokemon(holdingArray);
       }
     });
@@ -51,7 +54,7 @@ const HomePage = () => {
   };
 
   if (!specificPokemon || !specificPokeballs) {
-    return <div>Loading...</div>;
+    return <LoadingScreen></LoadingScreen>;
   }
 
   const handleSearch = (arrOne, arrTwo, searchInput) => {
