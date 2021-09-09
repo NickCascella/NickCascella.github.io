@@ -13,10 +13,16 @@ import HomePage from "./components/Home";
 
 function App() {
   const [shoppingCart, setShoppingCart] = useState([]);
+  const [shoppingCartPokeballs, setShoppingCartPokeballs] = useState([]);
 
   return (
     // <div>
-    <ShoppingCartContext.Provider value={{ shoppingCart, setShoppingCart }}>
+    <ShoppingCartContext.Provider
+      value={{
+        shoppingCart,
+        setShoppingCart,
+      }}
+    >
       <Router>
         <div className="organize">
           <Nav />

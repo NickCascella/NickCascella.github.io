@@ -2,7 +2,6 @@ import react, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../Context";
-import ShoppingCart from "./shoppingCart";
 
 const ShopPokemonIndvidually = ({ match }) => {
   const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
@@ -116,8 +115,25 @@ const ShopPokemonIndvidually = ({ match }) => {
       legendary: legendary,
       mythical: mythical,
     };
-    setShoppingCart(shoppingCart.concat(pokemonAdded));
-    e.preventDefault();
+
+    let cartCopy = [...shoppingCart];
+    if (cartCopy.some((pokemon) => pokemon.name === pokemonAdded.name)) {
+      let answer = cartCopy.findIndex(
+        (pokemon) => pokemon.name === pokemonAdded.name
+      );
+      if (
+        !cartCopy[answer].legendary === true &&
+        !cartCopy[answer].mythical === true
+      ) {
+        cartCopy[answer].quantity += pokemonAdded.quantity;
+      }
+
+      setShoppingCart(cartCopy);
+      e.preventDefault();
+    } else {
+      setShoppingCart(shoppingCart.concat(pokemonAdded));
+      e.preventDefault();
+    }
   };
 
   return (
@@ -207,7 +223,7 @@ const ShopPokemonIndvidually = ({ match }) => {
           <div className="specificPokemonDescription">
             <div className="specificPokemonSubTitle">Description:</div>
             <div className="shopSpecificPokemonCardDescription">
-              {speciesData.flavor_text_entries[7].flavor_text}
+              {speciesData.flavor_text_entries[6].flavor_text}
             </div>
           </div>
           <div className="specificPokemonPotentialMoves">

@@ -1,6 +1,9 @@
 import react, { useState, useEffect } from "react";
+import { useContext } from "react";
+import { ShoppingCartContext } from "../Context";
 
 const ShopSpecificPokeballs = ({ match }) => {
+  const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
   const [specificPokeball, setSpecificPokeball] = useState();
   const [pokeballQuantity, setPokeballQuantity] = useState(0);
 
@@ -20,6 +23,10 @@ const ShopSpecificPokeballs = ({ match }) => {
   if (!specificPokeball) {
     return <div>Loading...</div>;
   }
+
+  const generateId = () => {
+    return Math.random() * 1000;
+  };
 
   const checkPrice = () => {
     let price = specificPokeball.cost;
@@ -47,13 +54,27 @@ const ShopSpecificPokeballs = ({ match }) => {
     }
 
     const itemAdded = {
+      id: generateId(),
       name: name,
       imgSrc: specificPokeball.sprites.default,
       quantity: quantity,
       price: price,
+      legendary: false,
+      mythical: false,
     };
-    console.log(itemAdded);
-    e.preventDefault();
+
+    let cartCopy = [...shoppingCart];
+    if (cartCopy.some((pokemon) => pokemon.name === itemAdded.name)) {
+      let answer = cartCopy.findIndex(
+        (pokemon) => pokemon.name === itemAdded.name
+      );
+      cartCopy[answer].quantity += itemAdded.quantity;
+      setShoppingCart(cartCopy);
+      e.preventDefault();
+    } else {
+      setShoppingCart(shoppingCart.concat(itemAdded));
+      e.preventDefault();
+    }
   };
 
   return (
