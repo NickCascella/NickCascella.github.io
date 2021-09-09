@@ -15,6 +15,18 @@ const ShoppingCart = () => {
     runningTotal -= itemTotal;
   };
 
+  const changeQuantity = (id, itemQuantity, legendary, mythical) => {
+    if (itemQuantity < 0) {
+      return;
+    } else if (legendary === true || mythical === true) {
+      itemQuantity = 1;
+    }
+    let cartCopy = [...shoppingCart];
+    let index = cartCopy.findIndex((element) => element.id === id);
+    cartCopy[index].quantity = itemQuantity;
+    setShoppingCart(cartCopy);
+  };
+
   if (shoppingCart.length === 0) {
     return <div>Empty Cart</div>;
   }
@@ -28,7 +40,22 @@ const ShoppingCart = () => {
           <div id={item.id}>
             <div>Name: {item.name}</div>
             <img src={item.imgSrc}></img>
-            <div> Quantity: {item.quantity}</div>
+
+            <div>
+              Quantity:
+              <input
+                type="number"
+                value={item.quantity}
+                onChange={(e) => {
+                  changeQuantity(
+                    item.id,
+                    e.target.value,
+                    item.legendary,
+                    item.mythical
+                  );
+                }}
+              ></input>
+            </div>
             <div> Price: {item.price} Pokecoins</div>
             <div>Item Total: {itemTotal}</div>
             <button

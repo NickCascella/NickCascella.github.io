@@ -13,7 +13,7 @@ const HomePage = () => {
 
   let getPokeData = async () => {
     const pokeData = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${apiOffset}`
+      `https://pokeapi.co/api/v2/pokemon?limit=500&offset=${apiOffset}`
     );
     const pokeInfo = await pokeData.json();
     // setPokemonApi(pokeInfo.results);
@@ -26,7 +26,7 @@ const HomePage = () => {
       const specificPokeData = await fetch(result.url);
       const specificPokeInfo = await specificPokeData.json();
       holdingArray.push(specificPokeInfo);
-      if (holdingArray.length === 20) {
+      if (holdingArray.length === 22) {
         setSpecificPokemon(holdingArray);
       }
     });
@@ -50,6 +50,7 @@ const HomePage = () => {
       <div className="showcasePokemonTitle">Pokemon!</div>
       <input
         type="text"
+        className="searchItems"
         onChange={(e) => {
           handleSearch(specificPokemon, e.target.value);
         }}
@@ -75,22 +76,6 @@ const HomePage = () => {
           );
         })}
       </div>
-      <button
-        onClick={() => {
-          if (apiOffset >= 20) {
-            setApiOffset(apiOffset - 20);
-          }
-        }}
-      >
-        Previous page
-      </button>
-      <button
-        onClick={() => {
-          setApiOffset(apiOffset + 20);
-        }}
-      >
-        Next Page
-      </button>
     </div>
   );
 };

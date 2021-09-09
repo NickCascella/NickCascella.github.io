@@ -21,7 +21,9 @@ const ShopPokemonIndvidually = ({ match }) => {
     const specificPokemonUrl = await fetch(
       `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`
     );
+
     const specificPokemonUrlInfo = await specificPokemonUrl.json();
+    console.log(specificPokemonUrlInfo);
     setSpeciesData(specificPokemonUrlInfo);
     console.log(specificPokemonUrlInfo);
   };
@@ -31,6 +33,7 @@ const ShopPokemonIndvidually = ({ match }) => {
       `https://pokeapi.co/api/v2/pokemon/${pokemonId}`
     );
     const specificPokemonUrlInfo = await specificPokemonUrl.json();
+
     setPokemonData(specificPokemonUrlInfo);
     console.log(specificPokemonUrlInfo);
   };
@@ -69,8 +72,26 @@ const ShopPokemonIndvidually = ({ match }) => {
     );
   };
 
-  const changeQuantity = (e, clicked, increase) => {
-    if (pokemonQuantity > 0 && clicked === true && increase === false) {
+  const changeQuantity = (e, clicked, increase, mythical, legendary) => {
+    if (
+      (mythical === true || legendary === true) &&
+      increase === false &&
+      clicked === true
+    ) {
+      setPokemonQuantity(0);
+    } else if (
+      (mythical === true || legendary === true) &&
+      increase === null &&
+      clicked === false
+    ) {
+      if (pokemonQuantity === 1) {
+        setPokemonQuantity(0);
+      } else if (pokemonQuantity === 0) {
+        setPokemonQuantity(1);
+      }
+    } else if (mythical === true || legendary === true) {
+      setPokemonQuantity(1);
+    } else if (pokemonQuantity > 0 && clicked === true && increase === false) {
       setPokemonQuantity(pokemonQuantity - 1);
     } else if (clicked === true && increase === true) {
       const increaedValue = pokemonQuantity + 1;
@@ -81,18 +102,19 @@ const ShopPokemonIndvidually = ({ match }) => {
     e.preventDefault();
   };
 
-  const addToCart = (e, name, quantity, price) => {
-    if (price <= 0) {
+  const addToCart = (e, name, quantity, price, legendary, mythical) => {
+    if (price <= 0 || quantity === 0) {
       e.preventDefault();
       return;
     }
-
     const pokemonAdded = {
       id: generateId(),
       name: name,
       imgSrc: pokemonData.sprites.front_default,
       quantity: quantity,
       price: price,
+      legendary: legendary,
+      mythical: mythical,
     };
     setShoppingCart(shoppingCart.concat(pokemonAdded));
     e.preventDefault();
@@ -127,14 +149,22 @@ const ShopPokemonIndvidually = ({ match }) => {
                 e,
                 capitalizeFirstLetter(pokemonData.name),
                 pokemonQuantity,
-                pokemonCapturePrice
+                pokemonCapturePrice,
+                speciesData.is_legendary,
+                speciesData.is_mythical
               );
             }}
           >
             <div className="specificPokemonQuantity">
               <button
                 onClick={(e) => {
-                  changeQuantity(e, true, false);
+                  changeQuantity(
+                    e,
+                    true,
+                    false,
+                    speciesData.is_mythical,
+                    speciesData.is_legendary
+                  );
                 }}
               >
                 -
@@ -145,12 +175,24 @@ const ShopPokemonIndvidually = ({ match }) => {
                 type="number"
                 required
                 onChange={(e) => {
-                  changeQuantity(e, false);
+                  changeQuantity(
+                    e,
+                    false,
+                    null,
+                    speciesData.is_mythical,
+                    speciesData.is_legendary
+                  );
                 }}
               ></input>
               <button
                 onClick={(e) => {
-                  changeQuantity(e, true, true);
+                  changeQuantity(
+                    e,
+                    true,
+                    true,
+                    speciesData.is_mythical,
+                    speciesData.is_legendary
+                  );
                 }}
               >
                 +
@@ -165,7 +207,7 @@ const ShopPokemonIndvidually = ({ match }) => {
           <div className="specificPokemonDescription">
             <div className="specificPokemonSubTitle">Description:</div>
             <div className="shopSpecificPokemonCardDescription">
-              {speciesData.flavor_text_entries[12].flavor_text}
+              {speciesData.flavor_text_entries[7].flavor_text}
             </div>
           </div>
           <div className="specificPokemonPotentialMoves">
