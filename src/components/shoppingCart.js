@@ -6,6 +6,7 @@ const ShoppingCart = () => {
     useContext(GlobalContext);
 
   let runningTotal = 0;
+  let loaded = false;
 
   const removeFromCart = (id, itemTotal, pokemonArray) => {
     if (pokemonArray === true) {
@@ -38,7 +39,8 @@ const ShoppingCart = () => {
   };
 
   if (shoppingCart.length === 0) {
-    return <LoadingScreen></LoadingScreen>;
+    return <div>Empty Cart</div>;
+    //Add empty cart screen
   }
 
   return (

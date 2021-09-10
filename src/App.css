@@ -28,6 +28,16 @@ nav {
   list-style: none;
 }
 
+.cartNotice {
+  display: none;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: large;
+  color: white;
+}
+
 /* SEPERATE */
 
 .showcasePokemonScreen {

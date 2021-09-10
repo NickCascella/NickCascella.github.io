@@ -52,9 +52,10 @@ const ShopSpecificPokeballs = ({ match }) => {
   const addToCart = (e, name, quantity, price) => {
     if (price <= 0) {
       e.preventDefault();
+      addToCartNotice("cannotAdd");
       return;
     }
-
+    e.preventDefault();
     const itemAdded = {
       id: generateId(),
       name: name,
@@ -67,16 +68,32 @@ const ShopSpecificPokeballs = ({ match }) => {
 
     let cartCopy = [...shoppingCart];
     if (cartCopy.some((pokemon) => pokemon.name === itemAdded.name)) {
-      let answer = cartCopy.findIndex(
+      let result = cartCopy.findIndex(
         (pokemon) => pokemon.name === itemAdded.name
       );
-      cartCopy[answer].quantity += itemAdded.quantity;
+      cartCopy[result].quantity += itemAdded.quantity;
       setShoppingCart(cartCopy);
-      e.preventDefault();
+      addToCartNotice("updatingQuantity");
     } else {
       setShoppingCart(shoppingCart.concat(itemAdded));
-      e.preventDefault();
+      addToCartNotice("addToCart");
     }
+  };
+
+  const addToCartNotice = (cartNotice, e) => {
+    let popUp = document.getElementById("cartNoticed");
+    if (cartNotice === "addToCart") {
+      popUp.innerText = "Added to Cart";
+    } else if (cartNotice === "updatingQuantity") {
+      popUp.innerText = "Updated Quantity";
+    } else if (cartNotice === "cannotAdd") {
+      popUp.innerText = "Item not in stock";
+    }
+    popUp.style.display = "flex";
+
+    setTimeout(() => {
+      popUp.style.display = "none";
+    }, 1500);
   };
 
   return (
@@ -90,6 +107,9 @@ const ShopSpecificPokeballs = ({ match }) => {
             className="specificPokeballCardImage"
             src={specificPokeball.sprites.default}
           ></img>
+          <div id="cartNoticed" className="cartNotice">
+            Added to cart
+          </div>
           <form
             onSubmit={(e) => {
               addToCart(

@@ -104,36 +104,58 @@ const ShopPokemonIndvidually = ({ match }) => {
   const addToCart = (e, name, quantity, price, legendary, mythical) => {
     if (price <= 0 || quantity === 0) {
       e.preventDefault();
-      return;
-    }
-    const pokemonAdded = {
-      id: generateId(),
-      name: name,
-      imgSrc: pokemonData.sprites.front_default,
-      quantity: quantity,
-      price: price,
-      legendary: legendary,
-      mythical: mythical,
-    };
-
-    let cartCopy = [...shoppingCart];
-    if (cartCopy.some((pokemon) => pokemon.name === pokemonAdded.name)) {
-      let answer = cartCopy.findIndex(
-        (pokemon) => pokemon.name === pokemonAdded.name
-      );
-      if (
-        !cartCopy[answer].legendary === true &&
-        !cartCopy[answer].mythical === true
-      ) {
-        cartCopy[answer].quantity += pokemonAdded.quantity;
-      }
-
-      setShoppingCart(cartCopy);
-      e.preventDefault();
     } else {
-      setShoppingCart(shoppingCart.concat(pokemonAdded));
+      const pokemonAdded = {
+        id: generateId(),
+        name: name,
+        imgSrc: pokemonData.sprites.front_default,
+        quantity: quantity,
+        price: price,
+        legendary: legendary,
+        mythical: mythical,
+      };
+
+      let cartCopy = [...shoppingCart];
+      if (cartCopy.some((pokemon) => pokemon.name === pokemonAdded.name)) {
+        let answer = cartCopy.findIndex(
+          (pokemon) => pokemon.name === pokemonAdded.name
+        );
+        if (
+          !cartCopy[answer].legendary === true &&
+          !cartCopy[answer].mythical === true
+        ) {
+          cartCopy[answer].quantity += pokemonAdded.quantity;
+        }
+        setShoppingCart(cartCopy);
+        addToCartNotice("updatingQuantity", e, legendary, mythical);
+      } else {
+        setShoppingCart(shoppingCart.concat(pokemonAdded));
+        addToCartNotice("addToCart", e);
+      }
       e.preventDefault();
     }
+  };
+
+  const addToCartNotice = (cartNotice, e, legendary, mythical) => {
+    // clearTimeout(go);
+    let popUp = document.getElementById("cartNoticed");
+    if (cartNotice === "addToCart") {
+      popUp.innerText = "Added to Cart";
+    } else if (
+      cartNotice === "updatingQuantity" &&
+      legendary === false &&
+      mythical === false
+    ) {
+      popUp.innerText = "Updated Quantity";
+    } else if (legendary === true || mythical === true) {
+      popUp.innerText = "Cannot add this same Lengendary";
+    }
+    popUp.style.display = "flex";
+    e.preventDefault();
+
+    setTimeout(() => {
+      popUp.style.display = "none";
+    }, 1500);
   };
 
   return (
@@ -158,7 +180,10 @@ const ShopPokemonIndvidually = ({ match }) => {
               className="shopSpecificPokemonCardImage"
             ></img>
           </div>
-
+          <div id="cartNoticed" className="cartNotice">
+            Added to cart
+          </div>
+          ;
           <form
             onSubmit={(e) => {
               addToCart(
@@ -167,7 +192,8 @@ const ShopPokemonIndvidually = ({ match }) => {
                 pokemonQuantity,
                 pokemonCapturePrice,
                 speciesData.is_legendary,
-                speciesData.is_mythical
+                speciesData.is_mythical,
+                true
               );
             }}
           >
