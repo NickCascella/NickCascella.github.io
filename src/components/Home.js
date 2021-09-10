@@ -89,15 +89,27 @@ const HomePage = () => {
   };
 
   return (
-    <div>
-      <div className="showcasePokemonTitle">Pokemon!</div>
-      <input
-        type="text"
-        className="searchItems"
-        onChange={(e) => {
-          handleSearch(specificPokemon, specificPokeballs, e.target.value);
-        }}
-      ></input>
+    <div id="homeScreen">
+      <div id="homeScreenWelcome">
+        <div id="homeScreenWelcomeTitle">
+          Welcome to the <i>Pokemon Hub</i>!
+        </div>{" "}
+        <div id="homeScreenWelcomeMessage">
+          Browse our selection of 820 Pokemon and Pokemon related items! Know
+          exactly what your're looking for? Feel free to use our master search
+          bar here and find it instantly!
+        </div>
+        <div id="homeScreenCommandNote">
+          (The <i>ShowAll</i> command will pull all data up at once)
+        </div>
+        <input
+          type="text"
+          id="searchItems"
+          onChange={(e) => {
+            handleSearch(specificPokemon, specificPokeballs, e.target.value);
+          }}
+        ></input>
+      </div>
       <div className="showcasePokemonScreen">
         <div className="showcasePokemonCards">
           {filteredPokemon.map((pokemon) => {
@@ -113,7 +125,7 @@ const HomePage = () => {
                     className="shopPokemonCardImage"
                   ></img>
                   <div className="shopPokemonCardText">
-                    {capitalizeFirstLetter(pokemon.name)}
+                    #{pokemon.id} {capitalizeFirstLetter(pokemon.name)}
                   </div>
                 </Link>
               </div>

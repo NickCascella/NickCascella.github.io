@@ -183,7 +183,6 @@ const ShopPokemonIndvidually = ({ match }) => {
           <div id="cartNoticed" className="cartNotice">
             Added to cart
           </div>
-          ;
           <form
             onSubmit={(e) => {
               addToCart(

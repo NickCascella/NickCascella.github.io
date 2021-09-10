@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const ShopMain = () => {
   return (
-    <div>
+    <div id="shopMainScreen">
       <Link to="./shopPokemon">
         <li>Pokemon</li>
       </Link>
