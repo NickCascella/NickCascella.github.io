@@ -4,10 +4,10 @@ const ShopMain = () => {
   return (
     <div id="shopMainScreen">
       <Link to="./shopPokemon">
-        <li>Pokemon</li>
+        <div className="shopMainImgPokemon"></div>
       </Link>
       <Link to="./shopPokeballs" style={{ textDecoration: "none" }}>
-        <li>Pokeballs and Extras</li>
+        <div className="shopMainImgItems"></div>
       </Link>
     </div>
   );

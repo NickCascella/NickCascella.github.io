@@ -39,12 +39,12 @@ const ShoppingCart = () => {
   };
 
   if (shoppingCart.length === 0) {
-    return <div>Empty Cart</div>;
+    return <div id="shoppingCart">Empty Cart</div>;
     //Add empty cart screen
   }
 
   return (
-    <div>
+    <div id="shoppingCart">
       {shoppingCart.map((item) => {
         let itemTotal = item.quantity * item.price;
         runningTotal += itemTotal;
