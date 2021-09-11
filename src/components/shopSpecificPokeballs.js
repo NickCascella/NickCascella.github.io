@@ -18,7 +18,7 @@ const ShopSpecificPokeballs = ({ match }) => {
       `https://pokeapi.co/api/v2/item/${match.params.id}`
     );
     const pokeballsInfo = await pokeballsData.json();
-    console.log(pokeballsInfo);
+
     setSpecificPokeball(pokeballsInfo);
   };
 

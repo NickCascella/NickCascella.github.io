@@ -27,7 +27,6 @@ const ShoppingCart = () => {
       if (itemQuantity < 1 || itemQuantity > 99) {
         return;
       } else if (legendary === true || mythical === true) {
-        console.log(itemQuantity);
         itemQuantity === 1 ? (itemQuantity = 0) : (itemQuantity = 1);
       }
       let cartCopy = [...shoppingCart];

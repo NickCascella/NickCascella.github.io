@@ -20,7 +20,6 @@ const HomePage = () => {
     );
     const pokeInfo = await pokeData.json();
     getIndividualPokemonData(pokeInfo.results);
-    console.log(pokeInfo);
   };
 
   let getIndividualPokemonData = async (results) => {

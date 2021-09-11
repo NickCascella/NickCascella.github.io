@@ -22,9 +22,8 @@ const ShopPokemonIndvidually = ({ match }) => {
     );
 
     const specificPokemonUrlInfo = await specificPokemonUrl.json();
-    console.log(specificPokemonUrlInfo);
+
     setSpeciesData(specificPokemonUrlInfo);
-    console.log(specificPokemonUrlInfo);
   };
 
   const getIndividualData = async () => {
@@ -34,7 +33,6 @@ const ShopPokemonIndvidually = ({ match }) => {
     const specificPokemonUrlInfo = await specificPokemonUrl.json();
 
     setPokemonData(specificPokemonUrlInfo);
-    console.log(specificPokemonUrlInfo);
   };
 
   //Prevents early render of incomplete API calls
