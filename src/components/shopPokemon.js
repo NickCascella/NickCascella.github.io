@@ -38,8 +38,9 @@ const ShopPokemon = () => {
 
   return (
     <div className="showcasePokemonScreen">
-      <div className="showcasePokemonTitle">Pokemon!</div>
-
+      <div className="showcasePokemonTitle">
+        Browse all the Pokemon we have availible at our store here!
+      </div>
       <div className="showcasePokemonCards">
         {specificPokemon.map((pokemon) => {
           return (
@@ -54,33 +55,39 @@ const ShopPokemon = () => {
                   className="shopPokemonCardImage"
                 ></img>
                 <div className="shopPokemonCardText">
-                  {capitalizeFirstLetter(pokemon.name)}
+                  #{pokemon.id} {capitalizeFirstLetter(pokemon.name)}
                 </div>
               </Link>
             </div>
           );
         })}
       </div>
-      <button
-        onClick={() => {
-          if (apiOffset >= 20 && apiOffset !== 800) {
-            setApiOffset(apiOffset - 20);
-          }
-        }}
-      >
-        Previous page
-      </button>
-      <button
-        onClick={() => {
-          if (apiOffset != 800) {
-            setApiOffset(apiOffset + 20);
-          }
-        }}
-      >
-        Next Page
-      </button>
-      <div>
-        Page Number: {apiOffset / 20} / {40}
+      <div id="pageTrackingManagement">
+        <button
+          className="changePokemonPage"
+          id="previousPokemonPage"
+          onClick={() => {
+            if (apiOffset >= 20) {
+              setApiOffset(apiOffset - 20);
+            }
+          }}
+        >
+          &#129190;
+        </button>
+        <div id="pageTracker">
+          {apiOffset / 20 + 1} / {40}
+        </div>
+        <button
+          className="changePokemonPage"
+          id="nextPokemonPage"
+          onClick={() => {
+            if (apiOffset != 780) {
+              setApiOffset(apiOffset + 20);
+            }
+          }}
+        >
+          &#129191;
+        </button>
       </div>
     </div>
   );

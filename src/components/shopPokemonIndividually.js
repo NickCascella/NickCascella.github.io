@@ -105,6 +105,7 @@ const ShopPokemonIndvidually = ({ match }) => {
     if (price <= 0 || quantity === 0) {
       e.preventDefault();
     } else {
+      e.preventDefault();
       const pokemonAdded = {
         id: generateId(),
         name: name,
@@ -127,18 +128,16 @@ const ShopPokemonIndvidually = ({ match }) => {
           cartCopy[answer].quantity += pokemonAdded.quantity;
         }
         setShoppingCart(cartCopy);
-        addToCartNotice("updatingQuantity", e, legendary, mythical);
+        addToCartNotice("updatingQuantity", legendary, mythical);
       } else {
         setShoppingCart(shoppingCart.concat(pokemonAdded));
-        addToCartNotice("addToCart", e);
+        addToCartNotice("addToCart");
       }
-      e.preventDefault();
     }
   };
 
-  const addToCartNotice = (cartNotice, e, legendary, mythical) => {
-    // clearTimeout(go);
-    let popUp = document.getElementById("cartNoticed");
+  const addToCartNotice = (cartNotice, legendary, mythical) => {
+    let popUp = document.getElementById("cartUpdatingNotice");
     if (cartNotice === "addToCart") {
       popUp.innerText = "Added to Cart";
     } else if (
@@ -151,7 +150,6 @@ const ShopPokemonIndvidually = ({ match }) => {
       popUp.innerText = "Cannot add this same Lengendary";
     }
     popUp.style.display = "flex";
-    e.preventDefault();
 
     setTimeout(() => {
       popUp.style.display = "none";
@@ -161,26 +159,26 @@ const ShopPokemonIndvidually = ({ match }) => {
   return (
     <div className="showcaseSpecificPokemonScreen">
       <div className="shopSpecificPokemonCard" id={pokemonData.id}>
-        <div className="specificPokemonTitleAndImage">
+        <div className="specificPokemonCardLeftSide">
           <div
-            className="shopSpecificPokemonCardName"
+            className="shopSpecificPokemonCardLeftSideName"
             style={{ color: pokemonBackgroundColor }}
           >
             {capitalizeFirstLetter(pokemonData.name)}
           </div>
-          <div className="shopSpecificPokemonImages">
+          <div className="shopSpecificPokemonCardLeftSideImages">
             <img
               src={pokemonData.sprites.front_default}
               alt="Fetching"
-              className="shopSpecificPokemonCardImage"
+              className="shopSpecificPokemonCardLeftSideImage"
             ></img>
             <img
               src={pokemonData.sprites.back_default}
               alt="Fetching"
-              className="shopSpecificPokemonCardImage"
+              className="shopSpecificPokemonCardLeftSideImage"
             ></img>
           </div>
-          <div id="cartNoticed" className="cartNotice">
+          <div id="cartUpdatingNotice" class="cartUpdatingNotice">
             Added to cart
           </div>
           <form
@@ -196,8 +194,9 @@ const ShopPokemonIndvidually = ({ match }) => {
               );
             }}
           >
-            <div className="specificPokemonQuantity">
-              <button
+            <div className="shopSpecificPokemonCardLeftSideQuantity">
+              <div
+                className="shopSpecificPokemonCardLeftSideButtonIncDec"
                 onClick={(e) => {
                   changeQuantity(
                     e,
@@ -209,9 +208,9 @@ const ShopPokemonIndvidually = ({ match }) => {
                 }}
               >
                 -
-              </button>
+              </div>
               <input
-                className="specificPokemonQuantityDisplay"
+                className="shopSpecificPokemonCardLeftSideInput"
                 value={pokemonQuantity}
                 type="number"
                 required
@@ -225,7 +224,8 @@ const ShopPokemonIndvidually = ({ match }) => {
                   );
                 }}
               ></input>
-              <button
+              <div
+                className="shopSpecificPokemonCardLeftSideButtonIncDec"
                 onClick={(e) => {
                   changeQuantity(
                     e,
@@ -237,9 +237,11 @@ const ShopPokemonIndvidually = ({ match }) => {
                 }}
               >
                 +
-              </button>
+              </div>
             </div>
-            <button type="submit">Add</button>
+            <button className="addToCart" type="submit">
+              Add
+            </button>
           </form>
         </div>
 
@@ -290,3 +292,121 @@ function lettersOnly(str) {
 }
 
 export default ShopPokemonIndvidually;
+
+{
+  /* <div className="showcaseSpecificPokemonScreen">
+<div className="shopSpecificPokemonCard" id={pokemonData.id}>
+  <div className="specificPokemonTitleAndImage">
+    <div
+      className="shopSpecificPokemonCardName"
+      style={{ color: pokemonBackgroundColor }}
+    >
+      {capitalizeFirstLetter(pokemonData.name)}
+    </div>
+    <div className="shopSpecificPokemonImages">
+      <img
+        src={pokemonData.sprites.front_default}
+        alt="Fetching"
+        className="shopSpecificPokemonCardImage"
+      ></img>
+      <img
+        src={pokemonData.sprites.back_default}
+        alt="Fetching"
+        className="shopSpecificPokemonCardImage"
+      ></img>
+    </div>
+    <div id="cartNoticed" className="cartNotice">
+      Added to cart
+    </div>
+    <form
+      onSubmit={(e) => {
+        addToCart(
+          e,
+          capitalizeFirstLetter(pokemonData.name),
+          pokemonQuantity,
+          pokemonCapturePrice,
+          speciesData.is_legendary,
+          speciesData.is_mythical,
+          true
+        );
+      }}
+    >
+      <div className="specificPokemonQuantity">
+        <button
+          onClick={(e) => {
+            changeQuantity(
+              e,
+              true,
+              false,
+              speciesData.is_mythical,
+              speciesData.is_legendary
+            );
+          }}
+        >
+          -
+        </button>
+        <input
+          className="specificPokemonQuantityDisplay"
+          value={pokemonQuantity}
+          type="number"
+          required
+          onChange={(e) => {
+            changeQuantity(
+              e,
+              false,
+              null,
+              speciesData.is_mythical,
+              speciesData.is_legendary
+            );
+          }}
+        ></input>
+        <div
+          onClick={(e) => {
+            changeQuantity(
+              e,
+              true,
+              true,
+              speciesData.is_mythical,
+              speciesData.is_legendary
+            );
+          }}
+        >
+          +
+        </div>
+      </div>
+      <button type="submit">Add</button>
+    </form>
+  </div>
+
+  <div className="specificPokemonCardDetails">
+    <div className="specificPokemonCardDetailsTitle">Details</div>
+    <div className="specificPokemonDescription">
+      <div className="specificPokemonSubTitle">Description:</div>
+      <div className="shopSpecificPokemonCardDescription">
+        {lettersOnly(speciesData.flavor_text_entries[7].flavor_text)}
+      </div>
+    </div>
+    <div className="specificPokemonPotentialMoves">
+      <div className="specificPokemonSubTitle">Potential Moves:</div>
+      <div className="shopSpecificPokemonCardDescription">
+        (These are examples of some moves it COULD have. This is NOT a
+        full list.)
+      </div>
+      <div className="specificPokemonMovesList">
+        <div>{pickRandomMoves()}</div>
+      </div>
+    </div>
+    <div className="specificPokemonPotentialMoves">
+      <div className="specificPokemonSubTitle">Base Stats:</div>
+      <div>{organizePokemonStats()}</div>
+    </div>
+    <div className="specificPokemonPotentialMoves">
+      <div className="specificPokemonSubTitle">Cost of Acquistion:</div>
+      <div className="shopSpecificPokemonCardDescription">
+        {formatNumber(pokemonCapturePrice)} PokeCoins
+      </div>
+    </div>
+  </div>
+</div>
+</div> */
+}

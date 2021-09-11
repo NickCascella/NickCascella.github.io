@@ -80,8 +80,8 @@ const ShopSpecificPokeballs = ({ match }) => {
     }
   };
 
-  const addToCartNotice = (cartNotice, e) => {
-    let popUp = document.getElementById("cartNoticed");
+  const addToCartNotice = (cartNotice) => {
+    let popUp = document.getElementById("cartUpdatingNotice");
     if (cartNotice === "addToCart") {
       popUp.innerText = "Added to Cart";
     } else if (cartNotice === "updatingQuantity") {
@@ -107,7 +107,7 @@ const ShopSpecificPokeballs = ({ match }) => {
             className="specificPokeballCardImage"
             src={specificPokeball.sprites.default}
           ></img>
-          <div id="cartNoticed" className="cartNotice">
+          <div id="cartUpdatingNotice" class="cartUpdatingNotice">
             Added to cart
           </div>
           <form

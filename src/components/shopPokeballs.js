@@ -31,29 +31,61 @@ const ShopPokeballs = () => {
   if (!specificPokeballs) {
     return <LoadingScreen></LoadingScreen>;
   }
-  console.log(specificPokeballs);
+
   return (
-    <div classname="test">
-      <div id="showcaseAllPokeballs">
+    <div id="showcasePokeballsScreen">
+      <div className="showcasePokemonTitle">
+        View our selection of pokeball's and extras!
+      </div>
+      <div className="showcasePokemonCards">
         {specificPokeballs.map((pokeball) => {
           return (
-            <Link
-              className="shopPokemonCard"
-              to={`/shopPokeballs/${pokeball.id}`}
-            >
-              <div>
+            <div className="shopPokemonCard">
+              <Link
+                to={`/shopPokeballs/${pokeball.id}`}
+                style={{ textDecoration: "none" }}
+              >
                 <img
                   className="shopPokeballCardImage"
                   src={pokeball.sprites.default}
                 ></img>
-                <div>{capitalizeFirstLetter(pokeball.name)}</div>
-              </div>
-            </Link>
+                <div className="shopPokemonCardText">
+                  {capitalizeFirstLetter(pokeball.name)}
+                </div>
+              </Link>
+            </div>
           );
         })}
       </div>
     </div>
   );
+
+  // <div className="showcasePokemonScreen">
+  // <div className="showcasePokemonTitle">
+  //   Browse all the Pokemon we have availible at our store here!
+  // </div>
+
+  // <div className="showcasePokemonCards">
+  //   {specificPokemon.map((pokemon) => {
+  //     return (
+  //       <div className="shopPokemonCard" id={pokemon.id}>
+  //         <Link
+  //           to={`/shopPokemon/${pokemon.id}`}
+  //           style={{ textDecoration: "none" }}
+  //         >
+  //           <img
+  //             src={pokemon.sprites.front_default}
+  //             alt="Fetching"
+  //             className="shopPokemonCardImage"
+  //           ></img>
+  //           <div className="shopPokemonCardText">
+  //             #{pokemon.id} {capitalizeFirstLetter(pokemon.name)}
+  //           </div>
+  //         </Link>
+  //       </div>
+  //     );
+  //   })}
+  // </div>
 };
 
 function capitalizeFirstLetter(string) {

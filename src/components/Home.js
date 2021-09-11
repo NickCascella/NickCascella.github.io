@@ -110,8 +110,8 @@ const HomePage = () => {
           }}
         ></input>
       </div>
-      <div className="showcasePokemonScreen">
-        <div className="showcasePokemonCards">
+      <div className="showcaseAllScreen">
+        <div className="showcaseHomeCards">
           {filteredPokemon.map((pokemon) => {
             return (
               <div className="shopPokemonCard" id={pokemon.id}>
@@ -133,21 +133,20 @@ const HomePage = () => {
           })}
           {filteredItems.map((pokeball) => {
             return (
-              <Link
-                className="shopPokemonCard"
-                to={`/shopPokeballs/${pokeball.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <div className="shopPokemonCard" id={pokeball.id}>
+              <div className="shopPokemonCard" id={pokeball.id}>
+                <Link
+                  to={`/shopPokeballs/${pokeball.id}`}
+                  style={{ textDecoration: "none" }}
+                >
                   <img
-                    className="shopPokeballCardImage"
+                    className="shopPokemonCardImage"
                     src={pokeball.sprites.default}
                   ></img>
                   <div className="shopPokemonCardText">
                     {capitalizeFirstLetter(pokeball.name)}
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             );
           })}
         </div>
