@@ -97,14 +97,14 @@ const ShopSpecificPokeballs = ({ match }) => {
   };
 
   return (
-    <div className="specificPokeballScreen">
-      <div className="specificPokeballCard">
-        <div className="specificPokeballCardLeftSide">
-          <div className="specificPokeballCardName">
+    <div className="showcaseSpecificPokemonScreen">
+      <div className="shopSpecificPokemonCard">
+        <div className="shopSpecificPokemonCardLeftSide">
+          <div className="shopSpecificPokemonCardLeftSideName">
             {capitalizeFirstLetter(specificPokeball.name)}
           </div>
           <img
-            className="specificPokeballCardImage"
+            className="shopSpecificPokeballLeftSideImage"
             src={specificPokeball.sprites.default}
           ></img>
           <div id="cartUpdatingNotice" class="cartUpdatingNotice">
@@ -120,49 +120,76 @@ const ShopSpecificPokeballs = ({ match }) => {
               );
             }}
           >
-            <div>
-              <button
+            <div className="shopSpecificPokemonCardLeftSideQuantity">
+              <div
+                className="shopSpecificPokemonCardLeftSideButtonIncDec"
                 onClick={(e) => {
                   changeQuantity(e, true, false);
                 }}
               >
                 -
-              </button>
+              </div>
               <input
-                className="specificPokemonQuantityDisplay"
+                className="shopSpecificPokemonCardLeftSideInput"
                 value={pokeballQuantity}
                 type="number"
+                min="1"
+                max="99"
                 required
                 onChange={(e) => {
                   changeQuantity(e, false);
                 }}
               ></input>
-              <button
+              <div
+                className="shopSpecificPokemonCardLeftSideButtonIncDec"
                 onClick={(e) => {
                   changeQuantity(e, true, true);
                 }}
               >
                 +
-              </button>
+              </div>
             </div>
-            <button type="submit">Add</button>
+            <button className="addToCart" type="submit">
+              Add to Cart
+            </button>
           </form>
         </div>
-        <div className="specificPokeballCardRightSide">
-          <div className="specificPokeballSubheading">Category</div>
-          <div className="specificPokeballTextData">
-            {capitalizeFirstLetter(specificPokeball.category.name)}
+        <div className="shopSpecificPokemonCardRightSide">
+          <div className="shopSpecificPokemonCardRightSideDetailsTitle">
+            Details
           </div>
-          <div className="specificPokeballSubheading">Effect Entry</div>
-          <div className="specificPokeballTextData">
-            {lettersOnly(specificPokeball.effect_entries[0].effect)}
+          <div className="shopSpecificPokemonCardRightSideTextBlocks">
+            <div className="shopSpecificPokemonCardRightSideSubTitle">
+              Category
+            </div>
+            <div className="shopSpecificPokemonCardRightSideDescription">
+              {capitalizeFirstLetter(specificPokeball.category.name)}
+            </div>
           </div>
-          <div className="specificPokeballSubheading">Our humble opinion</div>
-          <div className="specificPokeballTextData">
-            {lettersOnly(specificPokeball.flavor_text_entries[2].text)}
+          <div className="shopSpecificPokemonCardRightSideTextBlocks">
+            <div className="shopSpecificPokemonCardRightSideSubTitle">
+              Effect Entry
+            </div>
+            <div className="shopSpecificPokemonCardRightSideDescription">
+              {lettersOnly(specificPokeball.effect_entries[0].effect)}
+            </div>
           </div>
-          <div className="specificPokeballSubheading">Price Per Unit</div>
-          <div className="specificPokeballTextData">{checkPrice()}</div>
+          <div className="shopSpecificPokemonCardRightSideTextBlocks">
+            <div className="shopSpecificPokemonCardRightSideSubTitle">
+              Our humble opinion
+            </div>
+            <div className="shopSpecificPokemonCardRightSideDescription">
+              {lettersOnly(specificPokeball.flavor_text_entries[2].text)}
+            </div>
+          </div>
+          <div className="shopSpecificPokemonCardRightSideTextBlocks">
+            <div className="shopSpecificPokemonCardRightSideSubTitle">
+              Price Per Unit
+            </div>
+            <div className="shopSpecificPokemonCardRightSideDescription">
+              {checkPrice()}
+            </div>
+          </div>
         </div>
       </div>
     </div>

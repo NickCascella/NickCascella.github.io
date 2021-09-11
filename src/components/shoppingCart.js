@@ -2,11 +2,9 @@ import { useContext } from "react";
 import { GlobalContext } from "../Context";
 
 const ShoppingCart = () => {
-  const { shoppingCart, setShoppingCart, LoadingScreen } =
-    useContext(GlobalContext);
+  const { shoppingCart, setShoppingCart } = useContext(GlobalContext);
 
   let runningTotal = 0;
-  let loaded = false;
 
   const removeFromCart = (id, itemTotal, pokemonArray) => {
     if (pokemonArray === true) {
@@ -26,10 +24,11 @@ const ShoppingCart = () => {
     mythical
   ) => {
     if (pokemonArray === true) {
-      if (itemQuantity < 0) {
+      if (itemQuantity < 1 || itemQuantity > 99) {
         return;
       } else if (legendary === true || mythical === true) {
-        itemQuantity = 1;
+        console.log(itemQuantity);
+        itemQuantity === 1 ? (itemQuantity = 0) : (itemQuantity = 1);
       }
       let cartCopy = [...shoppingCart];
       let index = cartCopy.findIndex((element) => element.id === id);
@@ -39,56 +38,94 @@ const ShoppingCart = () => {
   };
 
   if (shoppingCart.length === 0) {
-    return <div id="shoppingCart">Empty Cart</div>;
-    //Add empty cart screen
+    return (
+      <div id="shoppingCartEmpty">
+        <p id="shoppingCartEmptyText"> Empty Cart</p>
+      </div>
+    );
   }
 
   return (
-    <div id="shoppingCart">
-      {shoppingCart.map((item) => {
-        let itemTotal = item.quantity * item.price;
-        runningTotal += itemTotal;
-        return (
-          <div id={item.id}>
-            <div>Name: {item.name}</div>
-            <img src={item.imgSrc}></img>
+    <div id="shoppingCartScreen">
+      <div id="shoppingCartData">
+        {shoppingCart.map((item) => {
+          let itemTotal = item.quantity * item.price;
+          runningTotal += itemTotal;
+          return (
+            <div id={item.id} className="shoppingCartItem">
+              <div className="shoppingCartItemName">{item.name}</div>
+              <img className="shoppingCartItemImg" src={item.imgSrc}></img>
 
-            <div>
-              Quantity:
-              <input
-                type="number"
-                value={item.quantity}
-                onChange={(e) => {
-                  changeQuantity(
-                    true,
-                    item.id,
-                    e.target.value,
-                    item.legendary,
-                    item.mythical
-                  );
+              <div className="shoppingCartItemSubContainer">
+                <div className="shoppingCartItemSubContainerTitle">
+                  Quantity
+                </div>
+                <input
+                  className="shoppingCartItemQuantityInput"
+                  type="number"
+                  value={item.quantity}
+                  onChange={(e) => {
+                    changeQuantity(
+                      true,
+                      item.id,
+                      e.target.value,
+                      item.legendary,
+                      item.mythical
+                    );
+                  }}
+                ></input>
+              </div>
+              <div className="shoppingCartItemSubContainer">
+                <div className="shoppingCartItemSubContainerTitle">
+                  Price per
+                </div>
+                <div className="shoppingCartItemSubContainerNumber">
+                  {formatNumber(item.price)} Pokecoins
+                </div>
+              </div>
+              <div className="shoppingCartItemSubContainer">
+                <div className="shoppingCartItemSubContainerTitle">
+                  Item sub total
+                </div>
+                <div className="shoppingCartItemSubContainerNumber">
+                  {formatNumber(itemTotal)} PokeCoins
+                </div>
+              </div>
+              <button
+                class="shoppingCartItemRemoveBtn"
+                onClick={() => {
+                  removeFromCart(item.id, itemTotal, true);
                 }}
-              ></input>
+              >
+                Remove Item
+              </button>
             </div>
-            <div> Price: {formatNumber(item.price)} Pokecoins</div>
-            <div>Item Total: {formatNumber(itemTotal)} PokeCoins</div>
-            <button
-              onClick={() => {
-                removeFromCart(item.id, itemTotal, true);
-              }}
-            >
-              Remove Item
-            </button>
-          </div>
-        );
-      })}
-      <div>Sub Total: {formatNumber(runningTotal)} PokeCoins</div>
-      <div>
-        Sinnoh Provincal Tax:{" "}
-        {formatNumber(Math.round(runningTotal * 0.13 * 100) / 100)}
+          );
+        })}
       </div>
-      <div>
-        Grand Total: {formatNumber(Math.round(runningTotal * 1.13 * 100) / 100)}{" "}
-        PokeCoins
+      <div className="shoppingCartCumulativeTotals">
+        <div className="shoppingCartCumulativeTotalsContainers">
+          <div className="shoppingCartCumulativeTotalsTitles">Sub Total </div>{" "}
+          <div className="shoppingCartCumulativeTotalsNumbers">
+            {formatNumber(runningTotal)} PokeCoins
+          </div>
+        </div>
+        <div className="shoppingCartCumulativeTotalsContainers">
+          <div className="shoppingCartCumulativeTotalsTitles">
+            Sinnoh Provincal Tax
+          </div>
+          <div className="shoppingCartCumulativeTotalsNumbers">
+            {formatNumber(Math.round(runningTotal * 0.13 * 100) / 100)}{" "}
+            PokeCoins
+          </div>
+        </div>
+        <div className="shoppingCartCumulativeTotalsContainers">
+          <div className="shoppingCartCumulativeTotalsTitles">Grand Total</div>
+          <div className="shoppingCartCumulativeTotalsNumbers">
+            {formatNumber(Math.round(runningTotal * 1.13 * 100) / 100)}{" "}
+            PokeCoins
+          </div>
+        </div>
       </div>
     </div>
   );

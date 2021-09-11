@@ -3,21 +3,19 @@
 
 /* NAV BELOW */
 nav {
-  color: white;
   width: 100%;
   height: auto;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   flex-direction: row;
-  position: fixed;
+  position: absolute;
 }
 
 #navShoppingCartNumber {
   position: fixed;
   font-size: 15px;
-  background-color: red;
-  color: white;
+  color: rgb(255, 227, 71);
   text-align: center;
   width: 20px;
   height: 20px;
@@ -49,7 +47,6 @@ nav {
 
 #homeScreen {
   display: flex;
-  /* justify-content: flex-start; */
   flex-direction: column;
   align-items: center;
   background-image: url("/src/backgroundImages/pokeballBackground.JPG");
@@ -58,10 +55,6 @@ nav {
   background-position: center;
   height: 100vh;
   width: 100vw;
-}
-
-.showcasePokemonCards::-webkit-scrollbar-track {
-  display: none;
 }
 
 #homeScreenWelcome {
@@ -97,6 +90,18 @@ nav {
   color: orange;
 }
 
+.showcaseAllScreen {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.showcaseAllScreen::-webkit-scrollbar {
+  display: none;
+}
+
 .showcaseHomeCards {
   display: flex;
   justify-content: center;
@@ -121,15 +126,6 @@ nav {
   justify-content: space-evenly;
   align-items: center;
   list-style-type: none;
-}
-
-.showcaseAllScreen {
-  display: flex;
-  /* justify-content: flex-start; */
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  overflow-y: scroll;
 }
 
 .shopMainImgPokemon {
@@ -172,12 +168,16 @@ nav {
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
-  /* justify-content: flex-start; */
   width: 100%;
   height: 100vh;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   overflow-y: scroll;
+}
+
+.showcasePokemonScreen::-webkit-scrollbar {
+  display: none;
 }
 
 .showcasePokemonTitle {
@@ -189,7 +189,7 @@ nav {
 
 .showcasePokemonCards {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 5vh;
@@ -257,6 +257,10 @@ nav {
   overflow-y: scroll;
 }
 
+#showcasePokeballsScreen::-webkit-scrollbar {
+  display: none;
+}
+
 /* STORE - SHOP ITEMS SCREEN ABOVE*/
 /* STORE - SHOP SPECIFIC POKEMON/ITEM SCREEN BELOW */
 
@@ -266,11 +270,11 @@ nav {
   align-items: center;
   width: 100%;
   height: 100vh;
-  /* background-image: url("./backgroundImages/pokemonLandscape.JPG"); */
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
     url("./backgroundImages/pokemonLandscape.JPG");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 
 .shopSpecificPokemonCard {
@@ -279,27 +283,21 @@ nav {
   text-align: center;
   justify-content: space-around;
   align-items: center;
-  margin-top: 1%;
+  margin-top: 14%;
   margin-bottom: 15%;
   display: flex;
   flex-direction: row;
 }
 
-.specificPokemonCardLeftSide {
-  margin: auto;
+.shopSpecificPokemonCardLeftSide {
+  margin-left: auto;
 }
 
 .shopSpecificPokemonCardLeftSideName {
   font-family: "Press Start 2P", cursive;
   color: white;
   font-size: 40px;
-  padding-top: 60px;
 }
-
-/* .shopSpecificPokemonCardLeftSideImages {
-  display: flex;
-  flex-direction: row;
-} */
 
 .shopSpecificPokemonCardLeftSideImage {
   height: 300px;
@@ -310,12 +308,12 @@ nav {
   position: absolute;
   top: 50vh;
   left: 40vw;
-
   text-align: center;
   font-size: large;
   font-family: "Press Start 2P", cursive;
-  /* background: rgba(0, 0, 0, 0.7);
-  border-radius: 50%; */
+  background-color: rgba(0, 0, 0, 0.555);
+  border-radius: 50%;
+  padding: 20px;
   color: rgb(236, 223, 33);
 }
 
@@ -336,7 +334,7 @@ nav {
   outline: none;
 }
 
-input::-webkit-inner-spin-button {
+.shopSpecificPokemonCardLeftSideInput::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
@@ -357,145 +355,75 @@ input::-webkit-inner-spin-button {
 .addToCart {
   font-family: "Press Start 2P", cursive;
   position: relative;
-  top: 4vh;
-  color: white;
+  top: 3vh;
+  color: rgb(151, 255, 142);
   background: none;
   border: none;
   font-size: 20px;
 }
 
-/* STORE - SHOP SPECIFIC POKEMON SCREEN ABOVE */
-
-.specificPokemonCardDetailsTitle {
+.shopSpecificPokemonCardRightSide {
   color: white;
-  font-weight: bold;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 20px;
+  margin-top: 4%;
+  width: 40%;
+  margin: auto;
+  text-align: center;
   border: 2px solid rgba(255, 255, 255, 0.555);
   border-bottom: none;
 }
 
-.specificPokemonCardDetails {
-  color: white;
-  margin-top: 4%;
-  width: 40%;
-  margin-right: auto;
+.shopSpecificPokemonCardRightSideDetailsTitle {
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.555);
 }
 
-.specificPokemonSubTitle {
+.shopSpecificPokemonCardRightSideTextBlocks {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.555);
+  padding: 5px;
+}
+
+.shopSpecificPokemonCardRightSideSubTitle {
   font-size: 19px;
   font-weight: 500;
   padding-top: 5px;
   padding-bottom: 5px;
 }
 
-.specificPokemonDescription {
-  border: 2px solid rgba(255, 255, 255, 0.555);
-  padding: 5px;
-}
-
-.shopSpecificPokemonCardDescription {
+.shopSpecificPokemonCardRightSideDescription {
   font-style: italic;
   padding-bottom: 10px;
 }
+/* STORE - SHOP SPECIFIC POKEMON SCREEN ABOVE */
+/* STORE - SHOP SPECIFIC ITEM SCREEN BELOW */
 
-.specificPokemonPotentialMoves {
-  border: 2px solid rgba(255, 255, 255, 0.555);
-  border-top: none;
-  padding: 5px;
+.shopSpecificPokeballLeftSideImage {
+  height: 250px;
 }
+/* STORE - SHOP SPECIFIC ITEM SCREEN ABOVE */
+/* SHOPPING CART IS BELOW*/
 
-.specificPokemonMovesList {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-/* BELOW IS POKEBALLS CSS */
-
-#showcaseAllPokeballs {
-  display: flex;
+#shoppingCartEmpty {
+  background-image: url("/src/backgroundImages/pokeballBackground.JPG");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   width: 100%;
   height: 100vh;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.shopShowcasePokeballs {
-  width: 300px;
-}
-
-.shopPokeballCardImage {
-  height: 150px;
-  padding-top: 50px;
-}
-
-/* BELOW IS SPECIFIC POKEBALLS CSS */
-
-.specificPokeballScreen {
+  color: rgba(255, 255, 255, 0.541);
   display: flex;
   justify-content: center;
-  align-items: center;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
-    url("./backgroundImages/pokemonLandscape.JPG");
-  background-position: center;
-  background-size: cover;
-  height: 100vh;
 }
 
-.specificPokeballCard {
-  display: flex;
-  color: white;
-  margin-bottom: 7%;
+#shoppingCartEmptyText {
+  margin-top: 17vh;
+  color: rgba(255, 255, 255, 0.541);
+  font-size: 40px;
 }
 
-.specificPokeballCardLeftSide {
-  margin-top: 40px;
-  width: 400px;
-  text-align: center;
-}
-
-.specificPokeballCardName {
-  display: flex;
-  justify-content: center;
-  font-family: "Press Start 2P", cursive;
-  font-size: 30px;
-  color: cadetblue;
-}
-
-.specificPokeballCardImage {
-  width: 250px;
-}
-
-.specificPokeballCardRightSide {
-  border: 2px solid rgba(255, 255, 255, 0.555);
-  border-top: none;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-left: 10%;
-  width: 430px;
-}
-
-.specificPokeballSubheading {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 20px;
-  border-top: 2px solid rgba(255, 255, 255, 0.555);
-  width: 400px;
-  text-align: center;
-}
-
-.specificPokeballTextData {
-  width: 400px;
-  text-align: center;
-  font-style: italic;
-  padding-top: 10px;
-  padding-bottom: 20px;
-}
-
-#shoppingCart {
+#shoppingCartScreen {
   background-image: url("/src/backgroundImages/pokeballBackground.JPG");
   background-repeat: no-repeat;
   background-size: cover;
@@ -503,6 +431,105 @@ input::-webkit-inner-spin-button {
   width: 100%;
   height: 100vh;
 }
+
+#shoppingCartData {
+  padding-top: 10vh;
+  margin-bottom: 20px;
+  overflow-y: scroll;
+  max-height: 70vh;
+}
+
+#shoppingCartData::-webkit-scrollbar {
+  display: none;
+}
+
+.shoppingCartItem {
+  color: white;
+  border-top: 2px solid rgba(255, 253, 253, 0.623);
+  padding-top: 2vh;
+  padding-bottom: 1vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 20px;
+}
+
+.shoppingCartItemName {
+  font-family: "Press Start 2P", cursive;
+}
+
+.shoppingCartItemImg {
+  min-width: 70px;
+}
+
+.shoppingCartItemQuantityInput {
+  color: orange;
+  text-align: center;
+  width: 40%;
+  height: 10%;
+  position: relative;
+  left: 5%;
+  background: none;
+  outline: none;
+  font-size: 20px;
+}
+
+.shoppingCartItemSubContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.shoppingCartItemSubContainerTitle {
+  font-weight: 600;
+}
+
+.shoppingCartItemSubContainerNumber {
+  font-style: italic;
+  position: relative;
+  left: 1vw;
+  color: yellow;
+}
+
+.shoppingCartItemRemoveBtn {
+  color: rgb(153, 153, 153);
+  background: none;
+  border: none;
+  font-size: 20px;
+}
+
+.shoppingCartItemRemoveBtn:hover {
+  cursor: pointer;
+}
+
+.shoppingCartCumulativeTotals {
+  border-top: 2px solid rgba(255, 253, 253, 0.623);
+  color: white;
+  padding-top: 2vh;
+}
+
+.shoppingCartCumulativeTotalsContainers {
+  font-family: "VT323", monospace;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1vh;
+}
+
+.shoppingCartCumulativeTotalsTitles {
+  font-size: 35px;
+}
+
+.shoppingCartCumulativeTotalsNumbers {
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  font-size: 30px;
+  color: rgb(182, 182, 182);
+  text-decoration: underline;
+}
+
+/* SHOPPING CART IS ABOVE*/
 
 #loadingContainer {
   width: 100%;

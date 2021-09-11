@@ -16,7 +16,7 @@ const HomePage = () => {
 
   let getPokeData = async () => {
     const pokeData = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?limit=800&offset=0`
+      `https://pokeapi.co/api/v2/pokemon?limit=801&offset=0`
     );
     const pokeInfo = await pokeData.json();
     getIndividualPokemonData(pokeInfo.results);
@@ -95,7 +95,7 @@ const HomePage = () => {
           Welcome to the <i>Pokemon Hub</i>!
         </div>{" "}
         <div id="homeScreenWelcomeMessage">
-          Browse our selection of 820 Pokemon and Pokemon related items! Know
+          Browse our selection of 821 Pokemon and Pokemon related items! Know
           exactly what your're looking for? Feel free to use our master search
           bar here and find it instantly!
         </div>

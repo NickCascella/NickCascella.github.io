@@ -13,7 +13,7 @@ const ShopPokemon = () => {
 
   let getPokeData = async () => {
     const pokeData = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${apiOffset}`
+      `https://pokeapi.co/api/v2/pokemon?limit=21&offset=${apiOffset}`
     );
     const pokeInfo = await pokeData.json();
 
@@ -26,7 +26,7 @@ const ShopPokemon = () => {
       const specificPokeData = await fetch(result.url);
       const specificPokeInfo = await specificPokeData.json();
       holdingArray.push(specificPokeInfo);
-      if (holdingArray.length === 20) {
+      if (holdingArray.length === 21) {
         setSpecificPokemon(holdingArray);
       }
     });

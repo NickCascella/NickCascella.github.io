@@ -46,7 +46,7 @@ const ShopPokeballs = () => {
                 style={{ textDecoration: "none" }}
               >
                 <img
-                  className="shopPokeballCardImage"
+                  className="shopPokemonCardImage"
                   src={pokeball.sprites.default}
                 ></img>
                 <div className="shopPokemonCardText">
@@ -59,33 +59,6 @@ const ShopPokeballs = () => {
       </div>
     </div>
   );
-
-  // <div className="showcasePokemonScreen">
-  // <div className="showcasePokemonTitle">
-  //   Browse all the Pokemon we have availible at our store here!
-  // </div>
-
-  // <div className="showcasePokemonCards">
-  //   {specificPokemon.map((pokemon) => {
-  //     return (
-  //       <div className="shopPokemonCard" id={pokemon.id}>
-  //         <Link
-  //           to={`/shopPokemon/${pokemon.id}`}
-  //           style={{ textDecoration: "none" }}
-  //         >
-  //           <img
-  //             src={pokemon.sprites.front_default}
-  //             alt="Fetching"
-  //             className="shopPokemonCardImage"
-  //           ></img>
-  //           <div className="shopPokemonCardText">
-  //             #{pokemon.id} {capitalizeFirstLetter(pokemon.name)}
-  //           </div>
-  //         </Link>
-  //       </div>
-  //     );
-  //   })}
-  // </div>
 };
 
 function capitalizeFirstLetter(string) {

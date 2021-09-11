@@ -41,6 +41,7 @@ const ShopPokemonIndvidually = ({ match }) => {
   if (!speciesData || !pokemonData) {
     return <LoadingScreen></LoadingScreen>;
   }
+
   const pokemonBackgroundColor = speciesData.color.name;
   const pokemonCapturePrice = Math.floor(
     (1 / speciesData.capture_rate) * 100000
@@ -54,7 +55,7 @@ const ShopPokemonIndvidually = ({ match }) => {
     return pokemonData.stats.map((stats) => {
       return (
         <div>
-          {stats.stat.name} : {stats.base_stat}
+          {capitalizeFirstLetter(stats.stat.name)} : {stats.base_stat}
         </div>
       );
     });
@@ -62,11 +63,11 @@ const ShopPokemonIndvidually = ({ match }) => {
 
   const pickRandomMoves = () => {
     return (
-      <div className="specificPokemonMovesList">
-        <div>{pokemonData.moves[0].move.name}</div>
-        <div>{pokemonData.moves[1].move.name}</div>
-        <div>{pokemonData.moves[2].move.name}</div>
-        <div>{pokemonData.moves[3].move.name}</div>
+      <div>
+        <div>{capitalizeFirstLetter(pokemonData.moves[0].move.name)}</div>
+        <div>{capitalizeFirstLetter(pokemonData.moves[1].move.name)}</div>
+        <div>{capitalizeFirstLetter(pokemonData.moves[2].move.name)}</div>
+        <div>{capitalizeFirstLetter(pokemonData.moves[3].move.name)}</div>
       </div>
     );
   };
@@ -126,6 +127,9 @@ const ShopPokemonIndvidually = ({ match }) => {
           !cartCopy[answer].mythical === true
         ) {
           cartCopy[answer].quantity += pokemonAdded.quantity;
+          if (cartCopy[answer].quantity > 99) {
+            cartCopy[answer].quantity = 99;
+          }
         }
         setShoppingCart(cartCopy);
         addToCartNotice("updatingQuantity", legendary, mythical);
@@ -159,7 +163,7 @@ const ShopPokemonIndvidually = ({ match }) => {
   return (
     <div className="showcaseSpecificPokemonScreen">
       <div className="shopSpecificPokemonCard" id={pokemonData.id}>
-        <div className="specificPokemonCardLeftSide">
+        <div className="shopSpecificPokemonCardLeftSide">
           <div
             className="shopSpecificPokemonCardLeftSideName"
             style={{ color: pokemonBackgroundColor }}
@@ -213,6 +217,8 @@ const ShopPokemonIndvidually = ({ match }) => {
                 className="shopSpecificPokemonCardLeftSideInput"
                 value={pokemonQuantity}
                 type="number"
+                min="1"
+                max="99"
                 required
                 onChange={(e) => {
                   changeQuantity(
@@ -240,36 +246,47 @@ const ShopPokemonIndvidually = ({ match }) => {
               </div>
             </div>
             <button className="addToCart" type="submit">
-              Add
+              Add to Cart
             </button>
           </form>
         </div>
 
-        <div className="specificPokemonCardDetails">
-          <div className="specificPokemonCardDetailsTitle">Details</div>
-          <div className="specificPokemonDescription">
-            <div className="specificPokemonSubTitle">Description:</div>
-            <div className="shopSpecificPokemonCardDescription">
-              {lettersOnly(speciesData.flavor_text_entries[7].flavor_text)}
+        <div className="shopSpecificPokemonCardRightSide">
+          <div className="shopSpecificPokemonCardRightSideDetailsTitle">
+            Pokedex Entry #{pokemonData.id}
+          </div>
+          <div className="shopSpecificPokemonCardRightSideTextBlocks">
+            <div className="shopSpecificPokemonCardRightSideSubTitle">
+              Description
+            </div>
+            <div className="shopSpecificPokemonCardRightSideDescription">
+              {lettersOnly(speciesData.flavor_text_entries[6].flavor_text)}
             </div>
           </div>
-          <div className="specificPokemonPotentialMoves">
-            <div className="specificPokemonSubTitle">Potential Moves:</div>
-            <div className="shopSpecificPokemonCardDescription">
-              (These are examples of some moves it COULD have. This is NOT a
-              full list.)
+          <div className="shopSpecificPokemonCardRightSideTextBlocks">
+            <div className="shopSpecificPokemonCardRightSideSubTitle">
+              Potential Moves
             </div>
-            <div className="specificPokemonMovesList">
+            <div className="shopSpecificPokemonCardRightSideDescription">
+              (This is NOT a full list)
+            </div>
+            <div className="shopSpecificPokemonCardRightSideDescription">
               <div>{pickRandomMoves()}</div>
             </div>
           </div>
-          <div className="specificPokemonPotentialMoves">
-            <div className="specificPokemonSubTitle">Base Stats:</div>
-            <div>{organizePokemonStats()}</div>
+          <div className="shopSpecificPokemonCardRightSideTextBlocks">
+            <div className="shopSpecificPokemonCardRightSideSubTitle">
+              Base Stats
+            </div>
+            <div className="shopSpecificPokemonCardRightSideDescription">
+              {organizePokemonStats()}
+            </div>
           </div>
-          <div className="specificPokemonPotentialMoves">
-            <div className="specificPokemonSubTitle">Cost of Acquistion:</div>
-            <div className="shopSpecificPokemonCardDescription">
+          <div className="shopSpecificPokemonCardRightSideTextBlocks">
+            <div className="shopSpecificPokemonCardRightSideSubTitle">
+              Cost of Acquistion
+            </div>
+            <div className="shopSpecificPokemonCardRightSideDescription">
               {formatNumber(pokemonCapturePrice)} PokeCoins
             </div>
           </div>
@@ -288,7 +305,8 @@ function formatNumber(num) {
 }
 
 function lettersOnly(str) {
-  return str.replace(/[^a-zA-Z\é\É]/g, " ");
+  const newStr = capitalizeFirstLetter(str.toLowerCase());
+  return newStr.replace(/[^a-zA-Z\é\É\’]/g, " ");
 }
 
 export default ShopPokemonIndvidually;
