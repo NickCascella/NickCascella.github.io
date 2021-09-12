@@ -60,14 +60,24 @@ const ShopPokemonIndvidually = ({ match }) => {
   };
 
   const pickRandomMoves = () => {
-    return (
-      <div>
-        <div>{capitalizeFirstLetter(pokemonData.moves[0].move.name)}</div>
-        <div>{capitalizeFirstLetter(pokemonData.moves[1].move.name)}</div>
-        <div>{capitalizeFirstLetter(pokemonData.moves[2].move.name)}</div>
-        <div>{capitalizeFirstLetter(pokemonData.moves[3].move.name)}</div>
-      </div>
-    );
+    //handles pokemon like ditto
+    if (pokemonData.moves[3] === undefined) {
+      return (
+        <div>
+          <div>{capitalizeFirstLetter(pokemonData.moves[0].move.name)}</div>
+          <div>Other move data currently unavailible</div>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <div>{capitalizeFirstLetter(pokemonData.moves[0].move.name)}</div>
+          <div>{capitalizeFirstLetter(pokemonData.moves[1].move.name)}</div>
+          <div>{capitalizeFirstLetter(pokemonData.moves[2].move.name)}</div>
+          <div>{capitalizeFirstLetter(pokemonData.moves[3].move.name)}</div>
+        </div>
+      );
+    }
   };
 
   const changeQuantity = (e, clicked, increase, mythical, legendary) => {
