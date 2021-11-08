@@ -40,7 +40,7 @@ const ShopPokeballs = () => {
       <div className="showcasePokemonCards">
         {specificPokeballs.map((pokeball) => {
           return (
-            <div className="shopPokemonCard">
+            <div className="shopPokemonCard" key={pokeball.id}>
               <Link
                 to={`/shopPokeballs/${pokeball.id}`}
                 style={{ textDecoration: "none" }}
@@ -48,6 +48,7 @@ const ShopPokeballs = () => {
                 <img
                   className="shopPokemonCardImage"
                   src={pokeball.sprites.default}
+                  alt="pokeball image"
                 ></img>
                 <div className="shopPokemonCardText">
                   {capitalizeFirstLetter(pokeball.name)}

@@ -46,7 +46,7 @@ function App() {
 const LoadingScreen = () => {
   return (
     <div id="loadingContainer">
-      <div class="spinner-4"></div>
+      <div className="spinner-4"></div>
     </div>
   );
 };

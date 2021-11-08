@@ -113,7 +113,7 @@ const HomePage = () => {
         <div className="showcaseHomeCards">
           {filteredPokemon.map((pokemon) => {
             return (
-              <div className="shopPokemonCard" id={pokemon.id}>
+              <div className="shopPokemonCard" id={pokemon.id} key={pokemon.id}>
                 <Link
                   to={`/shopPokemon/${pokemon.id}`}
                   style={{ textDecoration: "none" }}
@@ -122,6 +122,7 @@ const HomePage = () => {
                     src={pokemon.sprites.front_default}
                     alt={pokemon.name}
                     className="shopPokemonCardImage"
+                    alt="pokemon front view"
                   ></img>
                   <div className="shopPokemonCardText">
                     #{pokemon.id} {capitalizeFirstLetter(pokemon.name)}
@@ -132,7 +133,11 @@ const HomePage = () => {
           })}
           {filteredItems.map((pokeball) => {
             return (
-              <div className="shopPokemonCard" id={pokeball.id}>
+              <div
+                className="shopPokemonCard"
+                id={pokeball.id}
+                key={pokeball.id}
+              >
                 <Link
                   to={`/shopPokeballs/${pokeball.id}`}
                   style={{ textDecoration: "none" }}
@@ -140,6 +145,7 @@ const HomePage = () => {
                   <img
                     className="shopPokemonCardImage"
                     src={pokeball.sprites.default}
+                    alt="pokeball image"
                   ></img>
                   <div className="shopPokemonCardText">
                     {capitalizeFirstLetter(pokeball.name)}

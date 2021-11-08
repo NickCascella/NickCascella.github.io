@@ -106,10 +106,9 @@ const ShopSpecificPokeballs = ({ match }) => {
           <img
             className="shopSpecificPokeballLeftSideImage"
             src={specificPokeball.sprites.default}
+            alt="pokeball image"
           ></img>
-          <div id="cartUpdatingNotice" class="cartUpdatingNotice">
-            Added to cart
-          </div>
+
           <form
             onSubmit={(e) => {
               addToCart(
@@ -153,6 +152,9 @@ const ShopSpecificPokeballs = ({ match }) => {
               Add to Cart
             </button>
           </form>
+          <div id="cartUpdatingNotice" class="cartUpdatingNotice">
+            Added to cart
+          </div>
         </div>
         <div className="shopSpecificPokemonCardRightSide">
           <div className="shopSpecificPokemonCardRightSideDetailsTitle">

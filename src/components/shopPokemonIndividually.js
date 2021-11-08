@@ -183,15 +183,13 @@ const ShopPokemonIndvidually = ({ match }) => {
               src={pokemonData.sprites.front_default}
               alt="Fetching"
               className="shopSpecificPokemonCardLeftSideImage"
+              alt="pokemon front image"
             ></img>
             <img
               src={pokemonData.sprites.back_default}
-              alt="Fetching"
+              alt="pokemon back image"
               className="shopSpecificPokemonCardLeftSideImage"
             ></img>
-          </div>
-          <div id="cartUpdatingNotice" class="cartUpdatingNotice">
-            Added to cart
           </div>
           <form
             onSubmit={(e) => {
@@ -257,6 +255,9 @@ const ShopPokemonIndvidually = ({ match }) => {
               Add to Cart
             </button>
           </form>
+          <div id="cartUpdatingNotice" class="cartUpdatingNotice">
+            Added to cart
+          </div>
         </div>
 
         <div className="shopSpecificPokemonCardRightSide">
@@ -318,121 +319,3 @@ function lettersOnly(str) {
 }
 
 export default ShopPokemonIndvidually;
-
-{
-  /* <div className="showcaseSpecificPokemonScreen">
-<div className="shopSpecificPokemonCard" id={pokemonData.id}>
-  <div className="specificPokemonTitleAndImage">
-    <div
-      className="shopSpecificPokemonCardName"
-      style={{ color: pokemonBackgroundColor }}
-    >
-      {capitalizeFirstLetter(pokemonData.name)}
-    </div>
-    <div className="shopSpecificPokemonImages">
-      <img
-        src={pokemonData.sprites.front_default}
-        alt="Fetching"
-        className="shopSpecificPokemonCardImage"
-      ></img>
-      <img
-        src={pokemonData.sprites.back_default}
-        alt="Fetching"
-        className="shopSpecificPokemonCardImage"
-      ></img>
-    </div>
-    <div id="cartNoticed" className="cartNotice">
-      Added to cart
-    </div>
-    <form
-      onSubmit={(e) => {
-        addToCart(
-          e,
-          capitalizeFirstLetter(pokemonData.name),
-          pokemonQuantity,
-          pokemonCapturePrice,
-          speciesData.is_legendary,
-          speciesData.is_mythical,
-          true
-        );
-      }}
-    >
-      <div className="specificPokemonQuantity">
-        <button
-          onClick={(e) => {
-            changeQuantity(
-              e,
-              true,
-              false,
-              speciesData.is_mythical,
-              speciesData.is_legendary
-            );
-          }}
-        >
-          -
-        </button>
-        <input
-          className="specificPokemonQuantityDisplay"
-          value={pokemonQuantity}
-          type="number"
-          required
-          onChange={(e) => {
-            changeQuantity(
-              e,
-              false,
-              null,
-              speciesData.is_mythical,
-              speciesData.is_legendary
-            );
-          }}
-        ></input>
-        <div
-          onClick={(e) => {
-            changeQuantity(
-              e,
-              true,
-              true,
-              speciesData.is_mythical,
-              speciesData.is_legendary
-            );
-          }}
-        >
-          +
-        </div>
-      </div>
-      <button type="submit">Add</button>
-    </form>
-  </div>
-
-  <div className="specificPokemonCardDetails">
-    <div className="specificPokemonCardDetailsTitle">Details</div>
-    <div className="specificPokemonDescription">
-      <div className="specificPokemonSubTitle">Description:</div>
-      <div className="shopSpecificPokemonCardDescription">
-        {lettersOnly(speciesData.flavor_text_entries[7].flavor_text)}
-      </div>
-    </div>
-    <div className="specificPokemonPotentialMoves">
-      <div className="specificPokemonSubTitle">Potential Moves:</div>
-      <div className="shopSpecificPokemonCardDescription">
-        (These are examples of some moves it COULD have. This is NOT a
-        full list.)
-      </div>
-      <div className="specificPokemonMovesList">
-        <div>{pickRandomMoves()}</div>
-      </div>
-    </div>
-    <div className="specificPokemonPotentialMoves">
-      <div className="specificPokemonSubTitle">Base Stats:</div>
-      <div>{organizePokemonStats()}</div>
-    </div>
-    <div className="specificPokemonPotentialMoves">
-      <div className="specificPokemonSubTitle">Cost of Acquistion:</div>
-      <div className="shopSpecificPokemonCardDescription">
-        {formatNumber(pokemonCapturePrice)} PokeCoins
-      </div>
-    </div>
-  </div>
-</div>
-</div> */
-}

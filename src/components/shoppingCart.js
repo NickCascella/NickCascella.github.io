@@ -51,9 +51,13 @@ const ShoppingCart = () => {
           let itemTotal = item.quantity * item.price;
           runningTotal += itemTotal;
           return (
-            <div id={item.id} className="shoppingCartItem">
+            <div id={item.id} className="shoppingCartItem" key={item.id}>
               <div className="shoppingCartItemName">{item.name}</div>
-              <img className="shoppingCartItemImg" src={item.imgSrc}></img>
+              <img
+                className="shoppingCartItemImg"
+                src={item.imgSrc}
+                alt={item.id}
+              ></img>
 
               <div className="shoppingCartItemSubContainer">
                 <div className="shoppingCartItemSubContainerTitle">
@@ -91,7 +95,7 @@ const ShoppingCart = () => {
                 </div>
               </div>
               <button
-                class="shoppingCartItemRemoveBtn"
+                className="shoppingCartItemRemoveBtn"
                 onClick={() => {
                   removeFromCart(item.id, itemTotal, true);
                 }}

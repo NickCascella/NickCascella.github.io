@@ -305,14 +305,14 @@ nav {
 
 #cartUpdatingNotice {
   display: none;
-  position: absolute;
-  top: 50vh;
-  left: 40vw;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 50px;
+  width: fit-content;
   text-align: center;
   font-size: large;
   font-family: "Press Start 2P", cursive;
   background-color: rgba(0, 0, 0, 0.555);
-  border-radius: 50%;
   padding: 20px;
   color: rgb(236, 223, 33);
 }

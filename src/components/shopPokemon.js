@@ -44,7 +44,7 @@ const ShopPokemon = () => {
       <div className="showcasePokemonCards">
         {specificPokemon.map((pokemon) => {
           return (
-            <div className="shopPokemonCard" id={pokemon.id}>
+            <div className="shopPokemonCard" id={pokemon.id} key={pokemon.id}>
               <Link
                 to={`/shopPokemon/${pokemon.id}`}
                 style={{ textDecoration: "none" }}
@@ -53,6 +53,7 @@ const ShopPokemon = () => {
                   src={pokemon.sprites.front_default}
                   alt="Fetching"
                   className="shopPokemonCardImage"
+                  alt="pokemon front image"
                 ></img>
                 <div className="shopPokemonCardText">
                   #{pokemon.id} {capitalizeFirstLetter(pokemon.name)}
